@@ -5,9 +5,7 @@ import { CoursesItemComponent } from './courses-list/courses-item/courses-item.c
 
 @NgModule({
   declarations: [CoursesListComponent, CoursesItemComponent],
-  imports: [
-    CommonModule
-  ],
-  exports: [CoursesListComponent]
+  imports: [CommonModule],
+  exports: [CoursesListComponent],
 })
-export class CoursesModule { }
+export class CoursesModule {}

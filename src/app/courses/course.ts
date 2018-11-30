@@ -6,6 +6,6 @@ export class Course implements CourseModel {
     public title: string,
     public creationDate: string,
     public duration: string,
-    public description: string
-  ) { }
+    public description: string,
+  ) {}
 }
