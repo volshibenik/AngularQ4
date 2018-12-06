@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { FooterComponent } from './footer/footer.component';
 import { LogoComponent } from './header/logo/logo.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -11,13 +12,14 @@ import { LogoComponent } from './header/logo/logo.component';
     BreadcrumbsComponent,
     FooterComponent,
     LogoComponent,
+    SearchComponent,
   ],
   imports: [CommonModule],
   exports: [
     HeaderComponent,
     BreadcrumbsComponent,
+    SearchComponent,
     FooterComponent,
-    LogoComponent,
   ],
 })
 export class CoreModule {}
