@@ -1,1 +1,5 @@
-<div>{{ courseEntity.title }}</div>
+<div>
+  <div>{{ courseEntity.title }}</div>
+  <button>Edit</button>
+  <button (click)="delete(courseEntity.id)">Delete</button>
+</div>

@@ -6,13 +6,13 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  private value = 'start typing...';
+  private value = 'search for this...';
 
   constructor() {}
 
   ngOnInit() {}
 
   search(): void {
-    console.log(this.value);
+    console.log('searching for: ', this.value);
   }
 }

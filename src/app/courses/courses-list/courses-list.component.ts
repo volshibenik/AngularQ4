@@ -8,9 +8,23 @@ import { Course } from '../course';
   styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit {
-  items: Course[] = COURSES; // do we need keyword public?
+  items: Course[] = []; // do we need keyword public?
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCourses();
+  }
+
+  getCourses(): void {
+    this.items = COURSES;
+  }
+
+  loadMore(): void {
+    console.log('will load additional elements');
+  }
+
+  onDelete(id) {
+    console.log('will delete item ', id);
+  }
 }
