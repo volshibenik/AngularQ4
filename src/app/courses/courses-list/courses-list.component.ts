@@ -24,7 +24,7 @@ export class CoursesListComponent implements OnInit {
     console.log('will load additional elements');
   }
 
-  onDelete(id) {
+  onDelete(id): void {
     console.log('will delete item ', id);
   }
 }

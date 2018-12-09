@@ -1,2 +1,25 @@
-<input [(ngModel)]="value" /> <button (click)="search()">Search</button>
-<button>Add course</button>
+<div class="row">
+  <div class="col-sm-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        [(ngModel)]="value"
+      />
+      <div class="input-group-append">
+        <button
+          type="button"
+          class="btn btn-outline-secondary"
+          id="button-addon2"
+          (click)="search()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-outline-secondary">Add course</button>
+  </div>
+</div>

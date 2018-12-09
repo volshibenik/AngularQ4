@@ -13,5 +13,5 @@ import { SearchComponent } from './search/search.component';
 })
 export class CoursesModule {}
 
-// does FormsModule need to be in nearest module.
-// Because ngModel in 'Search' works if it's here but doesn't if in app.module ?
+// does FormsModule need to be in nearest module?
+// Because ngModel in 'Search' works if it's here but doesn't if in app.module.
