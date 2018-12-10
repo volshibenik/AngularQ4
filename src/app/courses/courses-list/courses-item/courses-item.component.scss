@@ -1,0 +1,27 @@
+.item {
+  border: 1px solid #6c757d;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  padding: 10px;
+}
+.heading {
+  display: flex;
+  align-items: center;
+
+  .duration {
+    margin-left: auto;
+  }
+  .date {
+    margin-left: 40px;
+  }
+}
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  .btn {
+    min-width: 100px;
+  }
+}

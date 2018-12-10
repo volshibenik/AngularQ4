@@ -1,4 +1,11 @@
-<p>
-  courses-list works!
-  <app-courses-item></app-courses-item>
-</p>
+<div class="courses-list">
+  <div *ngFor="let item of items">
+    <app-courses-item
+      [courseEntity]="item"
+      (onDelete)="onDelete($event)"
+    ></app-courses-item>
+  </div>
+  <button class="btn btn-outline-secondary" (click)="loadMore()">
+    Load more
+  </button>
+</div>

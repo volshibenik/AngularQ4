@@ -13,11 +13,6 @@ import { LogoComponent } from './header/logo/logo.component';
     LogoComponent,
   ],
   imports: [CommonModule],
-  exports: [
-    HeaderComponent,
-    BreadcrumbsComponent,
-    FooterComponent,
-    LogoComponent,
-  ],
+  exports: [HeaderComponent, BreadcrumbsComponent, FooterComponent],
 })
 export class CoreModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseModel } from '../course.model';
+import { COURSES } from '../courses.mock';
+import { Course } from '../course';
 
 @Component({
   selector: 'app-courses-list',
@@ -7,9 +8,23 @@ import { CourseModel } from '../course.model';
   styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit {
-  public items: CourseModel[] = [];
+  items: Course[] = []; // do we need keyword public?
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getCourses();
+  }
+
+  getCourses(): void {
+    this.items = COURSES;
+  }
+
+  loadMore(): void {
+    console.log('will load additional elements');
+  }
+
+  onDelete(id): void {
+    console.log('will delete item ', id);
+  }
 }
