@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SearchComponent } from './search.component';
 
@@ -6,12 +6,11 @@ describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [SearchComponent],
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SearchComponent);
@@ -19,7 +18,9 @@ describe('SearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should blabla', () => {
+    const native: HTMLElement = fixture.nativeElement;
+    const input: HTMLElement = native.querySelector('input');
+    expect(input.nodeValue).toBe('initial search value...');
   });
 });
