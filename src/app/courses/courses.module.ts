@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesItemComponent } from './courses-list/courses-item/courses-item.component';
@@ -9,7 +10,7 @@ import { MaterialModule } from '../material.module';
 
 @NgModule({
   declarations: [CoursesListComponent, CoursesItemComponent, SearchComponent],
-  imports: [CommonModule, FormsModule, MaterialModule],
+  imports: [CommonModule, BrowserAnimationsModule, FormsModule, MaterialModule],
   exports: [CoursesListComponent, SearchComponent],
 })
 export class CoursesModule {}
