@@ -1,3 +1,4 @@
+import { Component, NgModule } from '@angular/core';
 import {
   ComponentFixture,
   TestBed,
@@ -6,27 +7,15 @@ import {
   fakeAsync,
 } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { Component, NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material';
 import { By } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SearchComponent } from './search.component';
 
-//////////////  MOCKS  ///////////////
-/* @Component({
-  selector: 'mat-form-field',
-  template: `
-    <input
-      matInput
-      type="text"
-      placeholder="Search input"
-      [(ngModel)]="value"
-    />
-  `,
-})
-class MatFormField {} */
+/* tslint:disable:component-class-suffix component-selector */
 
-import { MatInputModule } from '@angular/material';
+//////////////  MOCK Module & Material comp.  ///////////////
 @Component({ selector: 'mat-icon', template: '' })
 class MatIcon {}
 
@@ -36,6 +25,8 @@ class MatIcon {}
   exports: [SearchComponent, MatIcon],
 })
 export class CoursesModule {}
+
+///////////  Tests ////////////
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -53,27 +44,31 @@ describe('SearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should show/update value via 2way binding', fakeAsync(() => {
+  it('should show/update component property via 2way binding', fakeAsync(() => {
     const expectedOriginal = 'initial';
     const expectedNew = 'newValue';
+    const input: HTMLInputElement = fixture.debugElement.query(By.css('input'))
+      .nativeElement;
 
-    const input = <HTMLInputElement>(
-      fixture.debugElement.query(By.css('input')).nativeElement
-    );
-    console.log('11111111', input);
-    expect(component.value).toBe(
-      expectedOriginal,
-      `At start name should be ${expectedOriginal} `,
-    );
+    expect(component.value).toBe(expectedOriginal);
 
     input.value = expectedNew;
     input.dispatchEvent(new Event('input'));
     tick();
     fixture.detectChanges();
-    console.log('wwwwwwwwwwwwww', input.value);
-    expect(component.value).toBe(
-      expectedNew,
-      `Then name should be ${expectedNew} `,
-    );
+
+    expect(component.value).toBe(expectedNew);
   }));
+
+  it('should test click on search button', () => {
+    const originalLog = console.log;
+    console.log = jasmine.createSpy('log');
+    const expected = 'initial';
+    const searchBtn = fixture.nativeElement.querySelector('.button--search');
+
+    searchBtn.click();
+    expect(console.log).toHaveBeenCalledWith(expected);
+
+    console.log = originalLog;
+  });
 });

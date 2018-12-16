@@ -9,6 +9,6 @@ export class SearchComponent {
   value = 'initial';
 
   search(): void {
-    console.log('searching for: ', this.value);
+    console.log(this.value);
   }
 }

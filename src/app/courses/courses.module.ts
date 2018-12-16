@@ -6,11 +6,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoursesListComponent } from './courses-list/courses-list.component';
 import { CoursesItemComponent } from './courses-list/courses-item/courses-item.component';
 import { SearchComponent } from './search/search.component';
-import { MaterialModule } from '../material.module';
+import {
+  MatButtonModule,
+  MatInputModule,
+  MatIconModule,
+} from '@angular/material';
 
 @NgModule({
   declarations: [CoursesListComponent, CoursesItemComponent, SearchComponent],
-  imports: [CommonModule, BrowserAnimationsModule, FormsModule, MaterialModule],
+  imports: [
+    CommonModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatInputModule,
+  ],
   exports: [CoursesListComponent, SearchComponent],
 })
 export class CoursesModule {}

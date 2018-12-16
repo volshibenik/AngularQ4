@@ -1,68 +1,96 @@
-/* import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesItemComponent } from './courses-item.component';
-import { By } from '@angular/platform-browser';
-import { CourseModel } from '../../course.model';
+import { CourseModel } from 'src/app/core/models/course.model';
+import { Component } from '@angular/core';
 
-describe('CoursesItemComponent as just Class', () => {
-  it('shoud bla', () => {
+//   MOCKS  //
+const expectedCourse: CourseModel = {
+  id: 1,
+  title: 'myTitle',
+  creationDate: 'string',
+  duration: 'string',
+  description: 'string',
+};
+@Component({
+  template: `
+    <app-courses-item
+      [courseEntity]="item"
+      (onDelete)="onDelete($event)"
+    ></app-courses-item>
+  `,
+})
+class TestHostComponent {
+  item: CourseModel = expectedCourse;
+  deletedItemId: number;
+  onDelete(id: number) {
+    this.deletedItemId = id;
+  }
+}
+
+//   AS CLASS  //
+describe('CoursesItem as class', () => {
+  it('should test component methods as mere class', () => {
     const comp = new CoursesItemComponent();
-    const courseEntity = {
-      id: 1,
-      title: 'string',
-      creationDate: 'string',
-      duration: 'string',
-      description: 'string',
-    };
-    comp.courseEntity = courseEntity;
-    comp.onDelete.subscribe(id => expect(id).toBe(courseEntity.id));
+
+    comp.courseEntity = expectedCourse;
+    comp.onDelete.subscribe(id => expect(id).toBe(expectedCourse.id));
     comp.delete(1);
   });
 });
 
-describe('CoursesItemComponent with TestBed', () => {
-  let component: CoursesItemComponent;
-  let fixture: ComponentFixture<CoursesItemComponent>;
-  let expectedCourse: CourseModel;
+//   WITH TESTHOST  //
+describe('CoursesItem with TestHost', () => {
+  let testHostComp: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
   let root: HTMLElement;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesItemComponent],
-    }).compileComponents();
-  }));
+      declarations: [TestHostComponent, CoursesItemComponent],
+    });
+  });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoursesItemComponent);
-    component = fixture.componentInstance;
+    fixture = TestBed.createComponent(TestHostComponent);
+    testHostComp = fixture.componentInstance;
     root = fixture.nativeElement;
 
-    expectedCourse = {
-      id: 42,
-      title: 'Video Course 1',
-      creationDate: '05.29.2018',
-      duration: '1h 28min',
-      description: `Lorem`,
-    };
-    component.courseEntity = expectedCourse;
     fixture.detectChanges();
   });
 
-  it('should display hero name i', () => {
-    const e = expectedCourse.title;
-    console.log(e, root);
-    expect(root.textContent).toContain(e);
+  it('should create', () => {
+    const courseItemWrapper = root.querySelector('.item');
+    expect(courseItemWrapper).toBeTruthy();
   });
 
-  it('click "delete"', () => {
-    let id: number;
-    console.log('00', id);
-    component.onDelete.subscribe(data => (id = data));
-    const btn: HTMLElement = root.querySelector('.btn-danger');
+  it('should emit @Output event', () => {
+    const btn: HTMLElement = root.querySelector('.button--delete');
     btn.click();
-    console.log('11', id);
 
-    expect(id).toBe(expectedCourse.id);
+    expect(testHostComp.deletedItemId).toEqual(expectedCourse.id);
+  });
+
+  it('should bind new data, gotten via @Input & invoke onChanges hook', () => {
+    const originalLog = console.log;
+    console.log = jasmine.createSpy('log');
+    testHostComp.item = Object.assign({}, expectedCourse);
+    fixture.detectChanges();
+
+    expect(console.log).toHaveBeenCalledWith('onChanges');
+    console.log = originalLog;
+  });
+
+  it('should check whether @Input accepts & binds correct data', () => {
+    const { title } = expectedCourse;
+    const newTitle = 'newTitle';
+    const h2 = root.querySelector('.title');
+
+    expect(h2.textContent).toEqual(title);
+
+    testHostComp.item.title = newTitle;
+    fixture.detectChanges();
+
+    expect(h2.textContent).toEqual(newTitle);
   });
 });
- */
