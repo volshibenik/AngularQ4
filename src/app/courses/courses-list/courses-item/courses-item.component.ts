@@ -7,7 +7,7 @@ import {
   OnChanges,
   OnDestroy,
 } from '@angular/core';
-import { Course } from '../../course';
+import { CourseModel } from 'src/app/core/models/course.model';
 
 @Component({
   selector: 'app-courses-item',
@@ -15,10 +15,8 @@ import { Course } from '../../course';
   styleUrls: ['./courses-item.component.scss'],
 })
 export class CoursesItemComponent implements OnInit, OnChanges, OnDestroy {
-  @Input() courseEntity: Course;
+  @Input() courseEntity: CourseModel;
   @Output() onDelete = new EventEmitter<number>();
-
-  constructor() {}
 
   ngOnInit() {
     console.log('onInit');

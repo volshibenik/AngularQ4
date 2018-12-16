@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { COURSES } from '../courses.mock';
-import { Course } from '../course';
+import { CourseModel } from 'src/app/core/models/course.model';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,9 +8,7 @@ import { Course } from '../course';
   styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit {
-  items: Course[] = []; // do we need keyword public?
-
-  constructor() {}
+  items: CourseModel[] = []; // do we need keyword public?
 
   ngOnInit() {
     this.getCourses();
