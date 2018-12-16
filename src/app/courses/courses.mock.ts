@@ -1,6 +1,6 @@
-import { Course } from './course';
+import { CourseModel } from '../core/models/course.model';
 
-export const COURSES: Course[] = [
+export const COURSES: CourseModel[] = [
   {
     id: 0,
     title: 'Video Course 1',

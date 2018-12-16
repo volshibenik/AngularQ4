@@ -1,0 +1,15 @@
+.search {
+  display: flex;
+  align-items: center;
+
+  .button {
+    margin: 0 0 10px 10px;
+
+    &--add {
+      margin-left: auto;
+    }
+  }
+}
+.search-field {
+  width: 300px;
+}
