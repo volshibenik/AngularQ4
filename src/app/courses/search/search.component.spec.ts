@@ -1,11 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import {
-  ComponentFixture,
-  TestBed,
-  async,
-  tick,
-  fakeAsync,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material';
 import { By } from '@angular/platform-browser';
@@ -44,7 +38,7 @@ describe('SearchComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should show/update component property via 2way binding', fakeAsync(() => {
+  it('should show/update component property via 2way binding', async(() => {
     const expectedOriginal = 'initial';
     const expectedNew = 'newValue';
     const input: HTMLInputElement = fixture.debugElement.query(By.css('input'))
@@ -54,21 +48,17 @@ describe('SearchComponent', () => {
 
     input.value = expectedNew;
     input.dispatchEvent(new Event('input'));
-    tick();
     fixture.detectChanges();
 
     expect(component.value).toBe(expectedNew);
   }));
 
   it('should test click on search button', () => {
-    const originalLog = console.log;
-    console.log = jasmine.createSpy('log');
-    const expected = 'initial';
     const searchBtn = fixture.nativeElement.querySelector('.button--search');
+    component.search = jasmine.createSpy('search').and.callThrough();
 
     searchBtn.click();
-    expect(console.log).toHaveBeenCalledWith(expected);
 
-    console.log = originalLog;
+    expect(component.search).toHaveBeenCalled();
   });
 });

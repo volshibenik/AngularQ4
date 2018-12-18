@@ -31,11 +31,14 @@ class TestHostComponent {
 //   AS CLASS  //
 describe('CoursesItem as class', () => {
   it('should test component methods as mere class', () => {
+    const { id } = expectedCourse;
     const comp = new CoursesItemComponent();
-
+    comp.onDelete.emit = jasmine.createSpy('emit');
     comp.courseEntity = expectedCourse;
-    comp.onDelete.subscribe(id => expect(id).toBe(expectedCourse.id));
-    comp.delete(1);
+
+    comp.delete(id);
+    expect(comp.onDelete.emit).toHaveBeenCalled();
+    expect(comp.onDelete.emit).toHaveBeenCalledWith(id);
   });
 });
 
@@ -69,16 +72,6 @@ describe('CoursesItem with TestHost', () => {
     btn.click();
 
     expect(testHostComp.deletedItemId).toEqual(expectedCourse.id);
-  });
-
-  it('should bind new data, gotten via @Input & invoke onChanges hook', () => {
-    const originalLog = console.log;
-    console.log = jasmine.createSpy('log');
-    testHostComp.item = Object.assign({}, expectedCourse);
-    fixture.detectChanges();
-
-    expect(console.log).toHaveBeenCalledWith('onChanges');
-    console.log = originalLog;
   });
 
   it('should check whether @Input accepts & binds correct data', () => {

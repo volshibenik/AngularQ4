@@ -1,11 +1,8 @@
 import {
   Component,
-  OnInit,
   Input,
   Output,
   EventEmitter,
-  OnChanges,
-  OnDestroy,
 } from '@angular/core';
 import { CourseModel } from 'src/app/core/models/course.model';
 
@@ -14,19 +11,9 @@ import { CourseModel } from 'src/app/core/models/course.model';
   templateUrl: './courses-item.component.html',
   styleUrls: ['./courses-item.component.scss'],
 })
-export class CoursesItemComponent implements OnInit, OnChanges, OnDestroy {
+export class CoursesItemComponent {
   @Input() courseEntity: CourseModel;
   @Output() onDelete = new EventEmitter<number>();
-
-  ngOnInit() {
-    console.log('onInit');
-  }
-  ngOnChanges() {
-    console.log('onChanges');
-  }
-  ngOnDestroy() {
-    console.log('onDestroy');
-  }
 
   delete(id: number): void {
     this.onDelete.emit(id);

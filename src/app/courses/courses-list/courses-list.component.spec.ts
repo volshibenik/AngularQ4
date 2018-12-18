@@ -35,13 +35,11 @@ describe('CoursesListComponent', () => {
   });
 
   it('should load additional items on loadMore click', () => {
-    const originalLog = console.log;
-    console.log = jasmine.createSpy('log');
+    component.loadMore = jasmine.createSpy('loadMore').and.callThrough();
     const loadBtn: HTMLElement = root.querySelector('.button--load-more');
 
     loadBtn.click();
 
-    expect(console.log).toHaveBeenCalledWith('will load additional elements');
-    console.log = originalLog;
+    expect(component.loadMore).toHaveBeenCalled();
   });
 });
