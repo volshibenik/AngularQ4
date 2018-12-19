@@ -1,4 +1,4 @@
-<div class="courses-list">
+<div class="courses-list" *ngIf="items.length > 0">
   <div *ngFor="let item of items">
     <app-courses-item
       [courseEntity]="item"
@@ -11,4 +11,7 @@
   >
     Load more
   </button>
+</div>
+<div class="empty-list" *ngIf="items.length < 1">
+  no data. feel free to add new course
 </div>

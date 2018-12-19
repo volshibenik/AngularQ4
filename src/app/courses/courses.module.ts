@@ -10,9 +10,15 @@ import {
   MatInputModule,
   MatIconModule,
 } from '@angular/material';
+import { CourseRecencyDirective } from './course-recency.directive';
 
 @NgModule({
-  declarations: [CoursesListComponent, CoursesItemComponent, SearchComponent],
+  declarations: [
+    CoursesListComponent,
+    CoursesItemComponent,
+    SearchComponent,
+    CourseRecencyDirective,
+  ],
   imports: [
     CommonModule,
     FormsModule,
