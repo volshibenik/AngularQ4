@@ -1,10 +1,18 @@
-<div class="item" [appCourseRecency]="courseEntity.creationDate">
+<div
+  [ngClass]="{ item: true, 'item--top-rated': courseEntity.topRated }"
+  [appCourseRecency]="courseEntity.creationDate"
+>
   <div class="row">
     <div class="info col-sm-10">
       <div class="heading">
-        <h2 class="title">{{ courseEntity.title }}</h2>
+        <h2 class="title">
+          {{ courseEntity.title | uppercase }}
+          <span class="top-rated" *ngIf="courseEntity.topRated">
+            <mat-icon>grade</mat-icon>
+          </span>
+        </h2>
         <div class="duration">{{ courseEntity.duration }}</div>
-        <div class="date">{{ courseEntity.creationDate }}</div>
+        <div class="date">{{ courseEntity.creationDate | date: 'medium' }}</div>
       </div>
       <div class="description">
         <p>{{ courseEntity.description }}</p>

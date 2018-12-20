@@ -3,6 +3,10 @@
   border-radius: 3px;
   margin-bottom: 5px;
   padding: 10px;
+
+  &--top-rated {
+    background-color: rgba(silver, .55);
+  }
 }
 .heading {
   display: flex;
@@ -14,6 +18,9 @@
   .date {
     margin-left: 40px;
   }
+}
+.top-rated {
+  color: rgb(231, 189, 82);
 }
 .controls {
   display: flex;

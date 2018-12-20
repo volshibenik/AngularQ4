@@ -6,6 +6,7 @@ export const COURSES: CourseModel[] = [
     title: 'Video Course 1',
     creationDate: '2018-12-18T20:02:38',
     duration: '1h 28min',
+    topRated: true,
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor
     fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
   },
@@ -14,6 +15,7 @@ export const COURSES: CourseModel[] = [
     title: 'Video Course 2',
     creationDate: '2019-12-18T20:02:38',
     duration: '1h 29min',
+    topRated: false,
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor
     fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
   },
@@ -22,6 +24,7 @@ export const COURSES: CourseModel[] = [
     title: 'Video Course 3',
     creationDate: '2018-10-11T09:01:33',
     duration: '1h 30min',
+    topRated: false,
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor
     fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
   },
@@ -30,6 +33,7 @@ export const COURSES: CourseModel[] = [
     title: 'Video Course 4',
     creationDate: '2018-10-11T09:01:33',
     duration: '1h 31min',
+    topRated: true,
     description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor
     fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
   },

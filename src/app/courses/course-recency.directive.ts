@@ -1,13 +1,4 @@
-import {
-  Directive,
-  Input,
-  ViewContainerRef,
-  TemplateRef,
-  ElementRef,
-  HostListener,
-  OnInit,
-} from '@angular/core';
-import { DatePipe } from '@angular/common';
+import { Directive, Input, ElementRef, OnInit } from '@angular/core';
 
 const CONSTANTS = {
   outdateMS: 14 * 24 * 60 * 60 * 1000, // 2 weeks in ms
@@ -23,7 +14,6 @@ export class CourseRecencyDirective implements OnInit {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    console.log('1', this.courseRecency);
     this.maybePaintBorder(this.courseRecency);
   }
 
