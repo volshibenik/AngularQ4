@@ -17,11 +17,10 @@ export class CourseRecencyDirective implements OnInit {
     this.maybePaintBorder(this.courseRecency);
   }
 
-  maybePaintBorder(date: string): void {
-    const dateMS: number = new Date(date).getTime();
+  maybePaintBorder(courseRecency: string): void {
+    const dateMS: number = new Date(courseRecency).getTime();
     const now: number = Date.now();
     const timeAgo: number = now - dateMS;
-    console.log(timeAgo, timeAgo < 0);
 
     if (timeAgo < CONSTANTS.outdateMS && timeAgo >= 0) {
       this.el.nativeElement.style.borderColor = CONSTANTS.freshColor;

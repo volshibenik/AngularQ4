@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { COURSES } from '../courses.mock';
 import { CourseModel } from 'src/app/core/models/course.model';
+import { SearchPipe } from '../search.pipe';
 
 @Component({
   selector: 'app-courses-list',
@@ -8,7 +9,7 @@ import { CourseModel } from 'src/app/core/models/course.model';
   styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent implements OnInit {
-  items: CourseModel[] = []; // do we need keyword public?
+  items: CourseModel[] = [];
 
   ngOnInit() {
     this.getCourses();
@@ -22,7 +23,11 @@ export class CoursesListComponent implements OnInit {
     console.log('will load additional elements');
   }
 
-  onDelete(id): void {
+  onSearch(searchTerm: string): void {
+    this.items = new SearchPipe().transform(this.items, searchTerm);
+  }
+
+  onDelete(id: number): void {
     console.log('will delete item ', id);
   }
 }

@@ -1,5 +1,6 @@
+<app-search (onSearch)="onSearch($event)"></app-search>
 <div class="courses-list" *ngIf="items.length > 0">
-  <div *ngFor="let item of items">
+  <div *ngFor="let item of (items | orderBy)">
     <app-courses-item
       [courseEntity]="item"
       (onDelete)="onDelete($event)"

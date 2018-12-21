@@ -11,6 +11,9 @@ import {
   MatIconModule,
 } from '@angular/material';
 import { CourseRecencyDirective } from './course-recency.directive';
+import { DurationPipe } from './duration.pipe';
+import { OrderByPipe } from './order-by.pipe';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { CourseRecencyDirective } from './course-recency.directive';
     CoursesItemComponent,
     SearchComponent,
     CourseRecencyDirective,
+    DurationPipe,
+    OrderByPipe,
+    SearchPipe,
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,6 @@ import { CourseRecencyDirective } from './course-recency.directive';
     MatButtonModule,
     MatInputModule,
   ],
-  exports: [CoursesListComponent, SearchComponent],
+  exports: [CoursesListComponent],
 })
 export class CoursesModule {}

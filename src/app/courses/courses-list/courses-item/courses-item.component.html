@@ -11,7 +11,7 @@
             <mat-icon>grade</mat-icon>
           </span>
         </h2>
-        <div class="duration">{{ courseEntity.duration }}</div>
+        <div class="duration">{{ courseEntity.duration | duration }}</div>
         <div class="date">{{ courseEntity.creationDate | date: 'medium' }}</div>
       </div>
       <div class="description">
