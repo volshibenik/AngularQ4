@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, OnInit, OnChanges } from '@angular/core';
 
 const CONSTANTS = {
   outdateMS: 14 * 24 * 60 * 60 * 1000, // 2 weeks in ms
@@ -9,11 +9,11 @@ const CONSTANTS = {
 @Directive({
   selector: '[appCourseRecency]',
 })
-export class CourseRecencyDirective implements OnInit {
+export class CourseRecencyDirective implements OnChanges {
   @Input('appCourseRecency') courseRecency: string;
   constructor(private el: ElementRef) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     this.maybePaintBorder(this.courseRecency);
   }
 
