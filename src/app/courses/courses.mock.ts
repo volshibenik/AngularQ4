@@ -3,7 +3,7 @@ import { CourseModel } from '../core/models/course.model';
 export const COURSES: CourseModel[] = [
   {
     id: 0,
-    title: 'Video Course 1',
+    title: 'video Course 1',
     creationDate: '2017-12-18T20:02:38',
     duration: '128min',
     topRated: true,
@@ -12,7 +12,7 @@ export const COURSES: CourseModel[] = [
   },
   {
     id: 1,
-    title: 'Video Course 2',
+    title: 'video Course 2',
     creationDate: '2018-12-20T20:02:38',
     duration: '49min',
     topRated: false,
@@ -21,7 +21,7 @@ export const COURSES: CourseModel[] = [
   },
   {
     id: 2,
-    title: 'Video Course 3',
+    title: 'video Course 3',
     creationDate: '2019-10-11T09:01:33',
     duration: '1030min',
     topRated: false,
@@ -30,7 +30,7 @@ export const COURSES: CourseModel[] = [
   },
   {
     id: 3,
-    title: 'Video Course 4',
+    title: 'video Course 4',
     creationDate: '2011-10-11T09:01:33',
     duration: '233min',
     topRated: true,

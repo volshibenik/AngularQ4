@@ -6,7 +6,7 @@ import { CourseModel } from '../core/models/course.model';
 })
 export class OrderByPipe implements PipeTransform {
   transform(value: CourseModel[]): CourseModel[] {
-    return value.sort((a, b) => {
+    return value.slice().sort((a, b) => {
       return (a.creationDate > b.creationDate && -1) || 1;
     });
   }

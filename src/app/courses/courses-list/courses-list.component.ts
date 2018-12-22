@@ -10,6 +10,7 @@ import { SearchPipe } from '../search.pipe';
 })
 export class CoursesListComponent implements OnInit {
   items: CourseModel[] = [];
+  filteredItems: CourseModel[] = [];
 
   ngOnInit() {
     this.getCourses();
@@ -17,6 +18,11 @@ export class CoursesListComponent implements OnInit {
 
   getCourses(): void {
     this.items = COURSES;
+    this.syncFiltered();
+  }
+
+  syncFiltered(): void {
+    this.filteredItems = this.items.slice();
   }
 
   loadMore(): void {
@@ -24,7 +30,11 @@ export class CoursesListComponent implements OnInit {
   }
 
   onSearch(searchTerm: string): void {
-    this.items = new SearchPipe().transform(this.items, searchTerm);
+    this.syncFiltered();
+    this.filteredItems = new SearchPipe().transform(
+      this.filteredItems,
+      searchTerm,
+    );
   }
 
   onDelete(id: number): void {
