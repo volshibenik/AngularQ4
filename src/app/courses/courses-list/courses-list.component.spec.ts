@@ -1,8 +1,15 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
 import { COURSES } from '../courses.mock';
+
+@Pipe({ name: 'orderBy' })
+class OrderByPipe implements PipeTransform {
+  transform(value: any[]): any[] {
+    return value;
+  }
+}
 
 describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
@@ -11,7 +18,7 @@ describe('CoursesListComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesListComponent],
+      declarations: [CoursesListComponent, OrderByPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     });
   });

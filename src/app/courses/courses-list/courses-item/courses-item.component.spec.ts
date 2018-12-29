@@ -2,16 +2,41 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesItemComponent } from './courses-item.component';
 import { CourseModel } from 'src/app/core/models/course.model';
-import { Component } from '@angular/core';
+import {
+  Component,
+  Pipe,
+  PipeTransform,
+  Directive,
+  Input,
+} from '@angular/core';
 
 //   MOCKS  //
+
 const expectedCourse: CourseModel = {
   id: 1,
   title: 'myTitle',
-  creationDate: 'string',
-  duration: 'string',
+  creationDate: '2018-12-20T20:02:38',
+  duration: '49min',
+  topRated: false,
   description: 'string',
 };
+
+@Directive({ selector: '[appCourseRecency]' })
+class CourseRecencyDirective {
+  @Input('appCourseRecency') courseRecency: string;
+}
+
+@Pipe({ name: 'duration' })
+class DurationPipe implements PipeTransform {
+  transform(value: string): string {
+    return value;
+  }
+}
+
+/* tslint:disable:component-class-suffix component-selector */
+@Component({ selector: 'mat-icon', template: '' })
+class MatIcon {}
+
 @Component({
   template: `
     <app-courses-item
@@ -50,7 +75,13 @@ describe('CoursesItem with TestHost', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestHostComponent, CoursesItemComponent],
+      declarations: [
+        TestHostComponent,
+        CoursesItemComponent,
+        MatIcon,
+        CourseRecencyDirective,
+        DurationPipe,
+      ],
     });
   });
 
@@ -75,15 +106,15 @@ describe('CoursesItem with TestHost', () => {
   });
 
   it('should check whether @Input accepts & binds correct data', () => {
-    const { title } = expectedCourse;
-    const newTitle = 'newTitle';
-    const h2 = root.querySelector('.title');
+    const { description } = expectedCourse;
+    const newDescription = 'new';
+    const h2 = root.querySelector('.description');
 
-    expect(h2.textContent).toEqual(title);
+    expect(h2.textContent).toEqual(description);
 
-    testHostComp.item.title = newTitle;
+    testHostComp.item.description = newDescription;
     fixture.detectChanges();
 
-    expect(h2.textContent).toEqual(newTitle);
+    expect(h2.textContent).toEqual(newDescription);
   });
 });

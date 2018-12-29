@@ -1,5 +1,6 @@
-<div class="courses-list">
-  <div *ngFor="let item of items">
+<app-search (onSearch)="onSearch($event)"></app-search>
+<div class="courses-list" *ngIf="items.length > 0">
+  <div *ngFor="let item of (filteredItems | orderBy)">
     <app-courses-item
       [courseEntity]="item"
       (onDelete)="onDelete($event)"
@@ -11,4 +12,7 @@
   >
     Load more
   </button>
+</div>
+<div class="empty-list" *ngIf="items.length < 1">
+  no data. feel free to add new course
 </div>
