@@ -1,9 +1,10 @@
 <header class="header">
   <div class="container header-wrapper">
     <app-logo></app-logo>
-    <div class="login-mock">
+    <div class="login-mock" *ngIf="authenticated">
       <p>User Login</p>
       <button class="btn btn-outline-warning">Log off</button>
     </div>
+    <button class="btn btn-outline-warning">Log in</button>
   </div>
 </header>

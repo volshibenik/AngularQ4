@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { COURSES } from '../courses.mock';
+
 import { CourseModel } from 'src/app/core/models/course.model';
 import { SearchPipe } from '../search.pipe';
+import { CoursesService } from 'src/app/courses.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -12,12 +13,14 @@ export class CoursesListComponent implements OnInit {
   items: CourseModel[] = [];
   filteredItems: CourseModel[] = [];
 
+  constructor(private coursesService: CoursesService) {}
+
   ngOnInit() {
     this.getCourses();
   }
 
   getCourses(): void {
-    this.items = COURSES;
+    this.items = this.coursesService.getList();
     this.syncFiltered();
   }
 
@@ -38,6 +41,10 @@ export class CoursesListComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    console.log('will delete item ', id);
+    const confirmDelete = confirm(`Sure want to delete this?`);
+    if (confirmDelete) {
+      this.coursesService.removeItem(id);
+      this.syncFiltered(); // ?
+    }
   }
 }
