@@ -7,8 +7,16 @@ import { COURSES } from './courses/courses.mock';
 })
 export class CoursesService {
   private courses = COURSES;
+  private lastId = this.courses.slice().reduce((acc, el) => {
+    return el.id > acc ? el.id : acc;
+  }, 0);
+
+  generateId() {
+    return (this.lastId = this.lastId + 1);
+  }
 
   getList(): CourseModel[] {
+    console.log(this.lastId);
     return this.courses;
   }
 
@@ -16,9 +24,11 @@ export class CoursesService {
     return this.courses.find(e => e.id === id);
   }
 
-  addItem(course: CourseModel) {
-    // think how to get next id
-    this.courses.push(course);
+  addItem(course) {
+    course.id = this.generateId();
+    const newAr = this.courses.slice();
+    newAr.push(course);
+    this.courses = newAr;
   }
 
   updateItem(course: CourseModel) {
