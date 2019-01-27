@@ -108,11 +108,15 @@ describe('CoursesItem with TestHost', () => {
   it('should check whether @Input accepts & binds correct data', () => {
     const { description } = expectedCourse;
     const newDescription = 'new';
+    const newCourse = Object.assign({}, expectedCourse, {
+      description: newDescription,
+    });
+
     const h2 = root.querySelector('.description');
 
     expect(h2.textContent).toEqual(description);
 
-    testHostComp.item.description = newDescription;
+    testHostComp.item = newCourse;
     fixture.detectChanges();
 
     expect(h2.textContent).toEqual(newDescription);

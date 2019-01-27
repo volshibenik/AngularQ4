@@ -15,4 +15,7 @@ export class HeaderComponent implements OnChanges {
   isAuth() {
     this.authenticated = this.authService.isAuthenticated();
   }
+  logOut() {
+    this.authService.logout();
+  }
 }

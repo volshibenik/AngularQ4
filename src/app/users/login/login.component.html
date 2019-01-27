@@ -1,7 +1,15 @@
-<input type="text" #first /> <input type="text" #last /> <input type="email" />
-<button
-  class="btn btn-outline-warning"
-  (click)="login(first.value, last.value)"
->
-  Log in
-</button>
+<div class="login-page">
+  <h3>Login page</h3>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="login" #user />
+  </mat-form-field>
+  <button
+    class="button--login"
+    type="button"
+    mat-raised-button
+    color="primary"
+    (click)="login(user.value)"
+  >
+    Log in
+  </button>
+</div>

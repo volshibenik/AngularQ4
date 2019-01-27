@@ -3,8 +3,10 @@
     <app-logo></app-logo>
     <div class="login-mock" *ngIf="authenticated">
       <p>User Login</p>
-      <button class="btn btn-outline-warning">Log off</button>
+      <button class="btn btn-outline-warning" (click)="logOut()">
+        Log out
+      </button>
     </div>
-    <button class="btn btn-outline-warning">Log in</button>
+    <button class="btn btn-outline-warning" (click)="isAuth()">Log in</button>
   </div>
 </header>

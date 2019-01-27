@@ -30,7 +30,5 @@ export class AddCourseComponent {
       date: this.date,
     });
     this.clear();
-    const kk = this.coursesService.getList();
-    console.log(kk);
   }
 }
