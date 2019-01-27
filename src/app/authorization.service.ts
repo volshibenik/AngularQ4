@@ -12,11 +12,12 @@ export class AuthorizationService {
   private currentUser;
   login(user, token) {
     const userFromDB = this.users.find(
-      el => el.firstName === user.firstName && el.lastName === user.lastName,
+      el => el.firstName === user.first && el.lastName === user.last,
     );
     if (userFromDB) {
       this.currentUser = userFromDB;
       this.token = token;
+      console.log('Logged!');
     }
   }
 

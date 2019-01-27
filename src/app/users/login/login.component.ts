@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthorizationService } from 'src/app/authorization.service';
 
 @Component({
   selector: 'app-login',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {}
+  constructor(private authService: AuthorizationService) {}
 
   ngOnInit() {}
 
-  login() {}
+  login(first, last) {
+    console.log(first, last);
+
+    const token = Date.now();
+    this.authService.login({ first, last }, token);
+  }
 }
