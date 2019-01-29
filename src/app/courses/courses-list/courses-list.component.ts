@@ -1,8 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { COURSES } from '../courses.mock';
+
 import { CourseModel } from 'src/app/core/models/course.model';
 import { SearchPipe } from '../search.pipe';
-
+import { CoursesService } from 'src/app/courses.service';
+const kk = {
+  id: 10,
+  title: 'video Course 1',
+  creationDate: '2017-12-18T20:02:38',
+  duration: '128min',
+  topRated: true,
+  description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor
+  fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
+};
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
@@ -12,12 +21,14 @@ export class CoursesListComponent implements OnInit {
   items: CourseModel[] = [];
   filteredItems: CourseModel[] = [];
 
+  constructor(private coursesService: CoursesService) {}
+
   ngOnInit() {
     this.getCourses();
   }
 
   getCourses(): void {
-    this.items = COURSES;
+    this.items = this.coursesService.getList();
     this.syncFiltered();
   }
 
@@ -38,6 +49,10 @@ export class CoursesListComponent implements OnInit {
   }
 
   onDelete(id: number): void {
-    console.log('will delete item ', id);
+    const confirmDelete = confirm(`r u sure 'bout deletin this?`);
+    if (confirmDelete) {
+      this.coursesService.removeItem(id);
+      this.syncFiltered(); // ?
+    }
   }
 }

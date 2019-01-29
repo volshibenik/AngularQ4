@@ -1,0 +1,29 @@
+<mat-form-field class="full-width">
+  <input matInput placeholder="Title" value="new Video" [(ngModel)]="title" />
+</mat-form-field>
+
+<mat-form-field class="full-width">
+  <textarea
+    matInput
+    placeholder="Description"
+    [(ngModel)]="description"
+  ></textarea>
+</mat-form-field>
+
+<mat-form-field class="full-width">
+  <input matInput placeholder="Date" [(ngModel)]="date" />
+</mat-form-field>
+
+<mat-form-field class="full-width">
+  <input matInput placeholder="Duration" [(ngModel)]="duration" />
+</mat-form-field>
+
+<button
+  class="button--add"
+  type="button"
+  mat-raised-button
+  color="primary"
+  (click)="add()"
+>
+  add
+</button>
