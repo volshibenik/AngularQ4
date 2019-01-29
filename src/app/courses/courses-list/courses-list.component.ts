@@ -33,7 +33,6 @@ export class CoursesListComponent implements OnInit {
 
   loadMore(): void {
     console.log('will load additional elements');
-    // this.coursesService.getList()[0] = { title: 'kk' };
     console.log(this.items, this.coursesService.getList());
   }
 

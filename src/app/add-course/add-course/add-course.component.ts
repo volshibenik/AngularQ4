@@ -12,6 +12,8 @@ export class AddCourseComponent {
   duration = '';
   date = '';
 
+  // TODO switch to r. forms when have knowledge
+
   // maybe not use ngModel and just pass values from template?
   constructor(private coursesService: CoursesService) {}
 

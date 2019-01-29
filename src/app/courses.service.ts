@@ -25,15 +25,20 @@ export class CoursesService {
 
   addItem(course) {
     course.id = this.generateId();
-    const newAr = this.courses.slice();
-    newAr.push(course);
-    this.courses = newAr;
+    /*    const newCourses = this.courses.slice();
+    newCourses.push(course);
+    return (this.courses = newCourses);*/
+    // this method is invoked in separate module from Courses.
+    // is there a way to update courses if we make it immutable like delete() ?
+    this.courses.push(course);
   }
 
   updateItem(course: CourseModel) {
     const { id } = course;
     const index = this.courses.findIndex(e => e.id === id);
-    this.courses[index] = course;
+    const newCourses = this.courses.slice();
+    newCourses[index] = course;
+    return (this.courses = newCourses);
   }
 
   removeItem(id: number) {
