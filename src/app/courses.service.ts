@@ -16,7 +16,6 @@ export class CoursesService {
   }
 
   getList(): CourseModel[] {
-    console.log(this.lastId);
     return this.courses;
   }
 
@@ -39,7 +38,11 @@ export class CoursesService {
 
   removeItem(id: number) {
     const index = this.courses.findIndex(e => e.id === id);
-    this.courses.splice(index, 1);
-    console.log(this.courses);
+    const newCourses = this.courses.slice();
+    newCourses.splice(index, 1);
+    this.courses = newCourses;
+    // this.courses.splice(index, 1);
+    console.log('after delete on service', this.courses);
+    return this.courses;
   }
 }

@@ -6,6 +6,8 @@ import { CourseModel } from '../core/models/course.model';
 })
 export class SearchPipe implements PipeTransform {
   transform(value: CourseModel[], searchTerm: string): CourseModel[] {
-    return value.filter(el => el.title.includes(searchTerm));
+    return searchTerm
+      ? value.filter(el => el.title.includes(searchTerm))
+      : value;
   }
 }

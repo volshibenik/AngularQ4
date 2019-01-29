@@ -19,7 +19,7 @@ const kk = {
 })
 export class CoursesListComponent implements OnInit {
   items: CourseModel[] = [];
-  filteredItems: CourseModel[] = [];
+  searchTerm: string;
 
   constructor(private coursesService: CoursesService) {}
 
@@ -29,30 +29,28 @@ export class CoursesListComponent implements OnInit {
 
   getCourses(): void {
     this.items = this.coursesService.getList();
-    this.syncFiltered();
-  }
-
-  syncFiltered(): void {
-    this.filteredItems = this.items.slice();
   }
 
   loadMore(): void {
     console.log('will load additional elements');
+    // this.coursesService.getList()[0] = { title: 'kk' };
+    console.log(this.items, this.coursesService.getList());
   }
 
   onSearch(searchTerm: string): void {
-    this.syncFiltered();
-    this.filteredItems = new SearchPipe().transform(
-      this.filteredItems,
-      searchTerm,
-    );
+    /*     this.getCourses();
+    console.log('bef', this.items);
+    this.items = new SearchPipe().transform(this.items, searchTerm);
+    console.log('after', this.items);
+    console.log('serv', this.coursesService.getList()); */
+    this.searchTerm = searchTerm;
   }
 
   onDelete(id: number): void {
     const confirmDelete = confirm(`r u sure 'bout deletin this?`);
     if (confirmDelete) {
-      this.coursesService.removeItem(id);
-      this.syncFiltered(); // ?
+      this.items = this.coursesService.removeItem(id);
+      console.log('delete in list', this.items);
     }
   }
 }
