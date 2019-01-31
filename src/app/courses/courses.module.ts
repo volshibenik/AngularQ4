@@ -14,6 +14,7 @@ import { CourseRecencyDirective } from './course-recency.directive';
 import { DurationPipe } from './duration.pipe';
 import { OrderByPipe } from './order-by.pipe';
 import { SearchPipe } from './search.pipe';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { SearchPipe } from './search.pipe';
     MatIconModule,
     MatButtonModule,
     MatInputModule,
+    AppRoutingModule,
   ],
   exports: [CoursesListComponent],
 })

@@ -1,0 +1,14 @@
+a {
+  display: none;
+}
+
+.active {
+  color: coral;
+  font-size: 22px;
+  display: inline-block;
+  &:not(:first-child) {
+    &:before {
+      content: '/';
+    }
+  }
+}
