@@ -3,11 +3,15 @@ import { Routes, RouterModule } from '@angular/router';
 import { CoursesListComponent } from './courses/courses-list/courses-list.component';
 import { NotFoundComponent } from './core/not-found/not-found.component';
 import { AddCourseComponent } from './add-course/add-course/add-course.component';
+import { EditCourseComponent } from './edit-course/edit-course/edit-course.component';
+import { LoginComponent } from './admin/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/courses', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'courses', component: CoursesListComponent },
   { path: 'courses/add', component: AddCourseComponent },
+  { path: 'courses/:id', component: EditCourseComponent },
   { path: '**', component: NotFoundComponent },
 ];
 

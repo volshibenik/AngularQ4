@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { CoursesModule } from './courses/courses.module';
 import { AddCourseModule } from './add-course/add-course.module';
-import { UsersModule } from './users/users.module';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +18,7 @@ import { UsersModule } from './users/users.module';
     CoreModule,
     CoursesModule,
     AddCourseModule,
-    UsersModule,
+    AdminModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

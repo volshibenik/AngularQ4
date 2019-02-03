@@ -8,4 +8,4 @@ import { MatInputModule, MatButtonModule } from '@angular/material';
   imports: [CommonModule, MatInputModule, MatButtonModule],
   exports: [LoginComponent],
 })
-export class UsersModule {}
+export class AdminModule {}
