@@ -1,5 +1,6 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page">Courses</li>
-  </ol>
+  <a routerLink="./courses" [routerLinkActive]="'active'">Courses</a>
+  <a routerLink="./courses/add" [routerLinkActive]="'active'">Add</a>
+  <a *ngIf="data" class="a-id">{{data}}</a>
+  <!-- TODO  <a routerLink="./courses/:id" [routerLinkActive]="'active'">Add</a> -->
 </nav>

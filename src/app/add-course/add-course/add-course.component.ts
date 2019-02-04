@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CoursesService } from 'src/app/courses.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-course',
@@ -15,7 +16,7 @@ export class AddCourseComponent {
   // TODO switch to r. forms when have knowledge
 
   // maybe not use ngModel and just pass values from template?
-  constructor(private coursesService: CoursesService) {}
+  constructor(private coursesService: CoursesService, private router: Router) {}
 
   clear() {
     this.title = '';
@@ -32,5 +33,6 @@ export class AddCourseComponent {
       date: this.date,
     });
     this.clear();
+    this.router.navigate(['courses']);
   }
 }

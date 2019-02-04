@@ -1,0 +1,14 @@
+a {
+  display: none;
+}
+
+.active, .a-id {
+  color: coral;
+  font-size: 22px;
+  display: inline-block;
+  &:not(:last-of-type) {
+    &:after {
+      content: '/';
+    }
+  }
+}

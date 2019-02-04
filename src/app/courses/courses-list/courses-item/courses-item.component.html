@@ -19,7 +19,9 @@
       </div>
     </div>
     <div class="controls col-sm-2">
-      <button class="btn btn-primary button--edit">Edit</button>
+      <a class="btn btn-primary button--edit" routerLink="{{ courseEntity.id }}"
+        >Edit</a
+      >
       <button
         class="btn btn-danger button--delete"
         (click)="delete(courseEntity.id)"
