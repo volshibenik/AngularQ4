@@ -1,18 +1,29 @@
 import { Injectable } from '@angular/core';
 import { CourseModel } from './core/models/course.model';
 import { COURSES } from './courses/courses.mock';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
+const serverUrl = 'http://localhost/c'
 @Injectable({
   providedIn: 'root',
 })
 export class CoursesService {
   private courses = COURSES;
-  private lastId = this.courses.slice().reduce((acc, el) => {
-    return el.id > acc ? el.id : acc;
-  }, 0);
+  private lastId;
+
+  constructor(private http: HttpClient) {
+    this.lastId = this.courses.slice().reduce((acc, el) => {
+      return el.id > acc ? el.id : acc;
+    }, 0);
+  }
 
   generateId() {
     return (this.lastId = this.lastId + 1);
+  }
+
+  getCourses(): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(serverUrl);
   }
 
   getList(): CourseModel[] {

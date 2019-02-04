@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseModel } from 'src/app/core/models/course.model';
 import { SearchPipe } from '../search.pipe';
 import { CoursesService } from 'src/app/courses.service';
+import { log } from 'util';
 const kk = {
   id: 10,
   title: 'video Course 1',
@@ -21,10 +22,11 @@ export class CoursesListComponent implements OnInit {
   items: CourseModel[] = [];
   searchTerm: string;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
     this.getCourses();
+    this.coursesService.getCourses().subscribe(d => console.log('rrr', d))
   }
 
   getCourses(): void {
