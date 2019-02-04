@@ -8,6 +8,7 @@ import { CoreModule } from './core/core.module';
 import { CoursesModule } from './courses/courses.module';
 import { AddCourseModule } from './add-course/add-course.module';
 import { AdminModule } from './admin/admin.module';
+import { CanActivateGuard } from './guards/can-activate.guard';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { AdminModule } from './admin/admin.module';
     AddCourseModule,
     AdminModule,
   ],
-  providers: [],
+  providers: [CanActivateGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

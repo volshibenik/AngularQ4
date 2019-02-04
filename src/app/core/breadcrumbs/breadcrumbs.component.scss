@@ -2,12 +2,12 @@ a {
   display: none;
 }
 
-.active {
+.active, .a-id {
   color: coral;
   font-size: 22px;
   display: inline-block;
-  &:not(:first-child) {
-    &:before {
+  &:not(:last-of-type) {
+    &:after {
       content: '/';
     }
   }
