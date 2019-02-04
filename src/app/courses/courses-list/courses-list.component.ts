@@ -1,36 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CourseModel } from 'src/app/core/models/course.model';
-import { SearchPipe } from '../search.pipe';
 import { CoursesService } from 'src/app/courses.service';
-import { log } from 'util';
-const kk = {
-  id: 10,
-  title: 'video Course 1',
-  creationDate: '2017-12-18T20:02:38',
-  duration: '128min',
-  topRated: true,
-  description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor
-  fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
-};
+
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-courses-list',
   templateUrl: './courses-list.component.html',
   styleUrls: ['./courses-list.component.scss'],
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesListComponent implements OnInit, OnDestroy {
   items: CourseModel[] = [];
   searchTerm: string;
 
-  constructor(private coursesService: CoursesService) { }
-
+  constructor(private coursesService: CoursesService) {}
+  private subs: Subscription;
   ngOnInit() {
     this.getCourses();
-    this.coursesService.getCourses().subscribe(d => console.log('rrr', d))
+  }
+
+  ngOnDestroy() {
+    console.log('onDestroy');
+    this.subs.unsubscribe();
   }
 
   getCourses(): void {
-    this.items = this.coursesService.getList();
+    //    this.items = this.coursesService.getList();
+    this.subs = this.coursesService
+      .getCourses()
+      .subscribe(d => (this.items = d));
   }
 
   loadMore(): void {

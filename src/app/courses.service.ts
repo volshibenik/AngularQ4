@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { CourseModel } from './core/models/course.model';
-import { COURSES } from './courses/courses.mock';
+import { COURSES } from './courses/courses.mock.js';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
-const serverUrl = 'http://localhost/c'
+const serverUrl = 'http://localhost:3200/c';
 @Injectable({
   providedIn: 'root',
 })

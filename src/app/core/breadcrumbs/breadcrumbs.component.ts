@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd, UrlSegment } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { CoursesService } from 'src/app/courses.service';
 
 @Component({
@@ -9,19 +9,22 @@ import { CoursesService } from 'src/app/courses.service';
 })
 export class BreadcrumbsComponent implements OnInit {
   data = '';
-  constructor(private coursesService: CoursesService, private router: Router) { }
+  constructor(private coursesService: CoursesService, private router: Router) {}
   ngOnInit() {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const { url } = this.router;
-        const lastPiece = url.split('/').slice(-1).join('');
+        const lastPiece = url
+          .split('/')
+          .slice(-1)
+          .join('');
         if (+lastPiece === +lastPiece) {
           // means it's number -> id
-          this.data = this.coursesService.getItem(+lastPiece).title
+          this.data = this.coursesService.getItem(+lastPiece).title;
         } else {
-          this.data = ''
+          this.data = '';
         }
       }
-    })
+    });
   }
 }

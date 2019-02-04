@@ -9,11 +9,13 @@ import { CoursesModule } from './courses/courses.module';
 import { AddCourseModule } from './add-course/add-course.module';
 import { AdminModule } from './admin/admin.module';
 import { CanActivateGuard } from './guards/can-activate.guard';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule,
@@ -24,4 +26,4 @@ import { CanActivateGuard } from './guards/can-activate.guard';
   providers: [CanActivateGuard],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
