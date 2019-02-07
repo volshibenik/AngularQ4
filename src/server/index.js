@@ -8,14 +8,24 @@ const server = http.createServer(app);
 
 const { COURSES } = require('../app/courses/courses.mock');
 
-// app.use(express.static("dist"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.get('/c', (req, res, next) => {
+app.use((r, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
+  );
+  next();
+});
+
+app.get('/cc', (req, res, next) => {
   if (req) {
-    console.log('kkkkk');
-    res;
+    console.log('req', req.params, res.params);
+    req.on('data', function(data) {
+      console.log('qqq', data);
+    });
     res.json(COURSES);
   }
 });

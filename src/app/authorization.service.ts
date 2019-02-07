@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { USERS } from './admin/users.mock';
 import { UserModel } from './admin/user.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +11,11 @@ export class AuthorizationService {
   private token;
   private currentUser;
   pingHeader;
+
+  constructor(private http: HttpClient) {}
   login(login, token) {
     let success = false;
+    /*     this.http.get() */
     const userFromDB = this.users.find(el => el.login === login);
     if (userFromDB) {
       this.currentUser = userFromDB;
