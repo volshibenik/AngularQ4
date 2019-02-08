@@ -6,8 +6,11 @@ const bodyParser = require('body-parser');
 const app = express();
 const server = http.createServer(app);
 
-const { COURSES } = require('../app/courses/courses.mock');
+// const { COURSES } = require('./courses.data');
+const { courses } = require('./courses.json');
 
+
+// fs.writeFileSync('1.json', JSON.stringify(COURSES), 'utf-8')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -23,10 +26,20 @@ app.use((r, res, next) => {
 app.get('/cc', (req, res, next) => {
   if (req) {
     console.log('req', req.params, res.params);
-    req.on('data', function(data) {
+    req.on('data', function (data) {
       console.log('qqq', data);
     });
-    res.json(COURSES);
+    res.json(courses);
+  }
+});
+
+app.post('/login', (req, res, next) => {
+  if (req) {
+    console.log('wwwwwww', req.body, res.body);
+    req.on('data', function (data) {
+      console.log('qqq', data);
+    });
+
   }
 });
 
@@ -88,8 +101,9 @@ app.post("/admin/save", controllers.bodyError, (req, res, next) => {
     res.end();
   }
 });
-
- */
+https://manfredsteyer.github.io/angular-oauth2-oidc/docs/additional-documentation/working-with-httpinterceptors.html
+ https://angular.io/guide/service-worker-intro
+*/
 
 function errorHandler(err, req, res, next) {
   console.error('error', err.message);

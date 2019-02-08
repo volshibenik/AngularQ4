@@ -1,4 +1,6 @@
-const COURSES = [
+import { CourseModel } from '../core/models/course.model';
+
+export const COURSES: CourseModel[] = [
   {
     id: 0,
     title: 'video Course 1',
@@ -36,6 +38,3 @@ const COURSES = [
     fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?`,
   },
 ];
-module.exports = {
-  COURSES,
-};

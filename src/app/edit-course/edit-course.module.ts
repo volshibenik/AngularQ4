@@ -14,5 +14,6 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     AppRoutingModule,
   ],
+  exports: [EditCourseComponent]
 })
-export class EditCourseModule {}
+export class EditCourseModule { }

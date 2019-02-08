@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CourseModel } from './core/models/course.model';
-import { COURSES } from './courses/courses.mock.js';
+import { COURSES } from './courses/courses.mock';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

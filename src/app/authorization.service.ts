@@ -3,6 +3,8 @@ import { USERS } from './admin/users.mock';
 import { UserModel } from './admin/user.model';
 import { HttpClient } from '@angular/common/http';
 
+const serverUrl = 'http://localhost:3200/login';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,10 +14,10 @@ export class AuthorizationService {
   private currentUser;
   pingHeader;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
   login(login, token) {
     let success = false;
-    /*     this.http.get() */
+    this.http.post(serverUrl, token);
     const userFromDB = this.users.find(el => el.login === login);
     if (userFromDB) {
       this.currentUser = userFromDB;

@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, Pipe, PipeTransform } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
-import { COURSES } from '../courses.mock.js';
+import { COURSES } from '../courses.mock';
 
 @Pipe({ name: 'orderBy' })
 class OrderByPipe implements PipeTransform {
