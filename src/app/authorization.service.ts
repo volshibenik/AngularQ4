@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { USERS } from './admin/users.mock';
 import { UserModel } from './admin/user.model';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 const serverUrl = 'http://localhost:3200/login';
 
@@ -9,27 +9,24 @@ const serverUrl = 'http://localhost:3200/login';
   providedIn: 'root',
 })
 export class AuthorizationService {
-  private users: UserModel[] = USERS;
   private token;
   private currentUser;
   pingHeader;
+  // where do i store user and token, here or at server?
 
-  constructor(private http: HttpClient) { }
-  login(login, token) {
-    let success = false;
-    this.http.post(serverUrl, token);
-    const userFromDB = this.users.find(el => el.login === login);
-    if (userFromDB) {
-      this.currentUser = userFromDB;
-      this.token = token;
-      console.log('Logged!');
-      success = true;
-    }
-    // temp, while waitin for Observable
+  constructor(private http: HttpClient) {}
+
+  authenticate(user, token) {
+    this.currentUser = user;
+    this.token = token;
     this.pingHeader();
-
-    return success;
   }
+
+  logIn(login, token): Observable<UserModel> {
+    this.logout();
+    return this.http.post<UserModel>(serverUrl, { login, token });
+  }
+
   logout() {
     this.token = null;
     this.currentUser = null;

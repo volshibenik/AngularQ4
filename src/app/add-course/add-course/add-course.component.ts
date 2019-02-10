@@ -22,16 +22,16 @@ export class AddCourseComponent {
     this.title = '';
     this.description = '';
     this.duration = '';
-    this.date = '';
   }
 
   add() {
-    this.coursesService.addItem({
-      title: this.title,
-      description: this.description,
-      duration: this.duration,
-      date: this.date,
-    });
+    this.coursesService
+      .addItem({
+        title: this.title,
+        description: this.description,
+        duration: this.duration,
+      })
+      .subscribe(data => console.log(data));
     this.clear();
     this.router.navigate(['courses']);
   }

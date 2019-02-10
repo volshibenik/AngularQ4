@@ -1,22 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { AuthorizationService } from 'src/app/authorization.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+  private subs: Subscription;
   constructor(
     private authService: AuthorizationService,
     private router: Router,
   ) {}
 
-  login(login) {
+  logIn(login) {
     const token = Date.now();
-    const success = this.authService.login(login, token);
-    console.log('is Auth?', this.authService.isAuthenticated());
-    success && this.router.navigate(['courses']);
+    this.subs = this.authService.logIn(login, token).subscribe(user => {
+      if (user && user.login) {
+        this.authService.authenticate(user, token);
+        this.router.navigate(['courses']);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 }
