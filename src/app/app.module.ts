@@ -10,6 +10,7 @@ import { AddCourseModule } from './add-course/add-course.module';
 import { AdminModule } from './admin/admin.module';
 import { CanActivateGuard } from './guards/can-activate.guard';
 import { HttpClientModule } from '@angular/common/http';
+import { EditCourseModule } from './edit-course/edit-course.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     CoursesModule,
     AddCourseModule,
+    EditCourseModule,
     AdminModule,
   ],
   providers: [CanActivateGuard],

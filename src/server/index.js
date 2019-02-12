@@ -8,13 +8,12 @@ const server = http.createServer(app);
 
 // const { COURSES } = require('./courses.data');
 const { courses } = require('./courses.json');
+const { users } = require('./users.json');
 
-
-// fs.writeFileSync('1.json', JSON.stringify(COURSES), 'utf-8')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-app.use((r, res, next) => {
+app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
@@ -23,84 +22,95 @@ app.use((r, res, next) => {
   next();
 });
 
-app.get('/cc', (req, res, next) => {
-  if (req) {
-    console.log('req', req.params, res.params);
-    req.on('data', function (data) {
-      console.log('qqq', data);
-    });
-    res.json(courses);
+app.get('/courses', (req, res, next) => {
+  if (req.query) {
+    console.log('req', req.query);
+    const { start, count } = req.query;
+    const data = courses.slice(start, count);
+    res.json(data);
+  } else {
+    res.end();
   }
 });
 
-app.post('/login', (req, res, next) => {
-  if (req) {
-    console.log('wwwwwww', req.body, res.body);
-    req.on('data', function (data) {
-      console.log('qqq', data);
-    });
-
+app.get('/search', (req, res, next) => {
+  if (req.query) {
+    console.log('sear', req.query);
+    const { searchTerm } = req.query;
+    const data = courses.filter(
+      el =>
+        el.title.includes(searchTerm) || el.description.includes(searchTerm),
+    );
+    res.json(data);
+  } else {
+    res.end();
   }
+});
+
+app.post('/delete', (req, res, next) => {
+  const id = req.body && +req.body.id;
+  const newCourses = courses.slice();
+  const index = newCourses.findIndex(e => e.id === id);
+  newCourses.splice(index, 1);
+
+  if (newCourses && index) {
+    // instead of DB
+    fs.writeFileSync(
+      'src/server/courses.json',
+      JSON.stringify({ courses: newCourses }, null, 2),
+    );
+  }
+  res.json(newCourses);
+});
+
+let lastId = courses.slice().reduce((acc, el) => {
+  return el.id > acc ? el.id : acc;
+}, 0);
+
+console.log(lastId);
+
+app.post('/add', (req, res, next) => {
+  const id = ++lastId;
+  const { course } = req.body;
+  course.id = id;
+  course.creationDate = new Date();
+  course.topRated = false;
+  console.log('eeeee', course);
+  const newCourses = courses.slice();
+  newCourses.push(course);
+  if (newCourses) {
+    // instead of DB
+    fs.writeFileSync(
+      'src/server/courses.json',
+      JSON.stringify({ courses: newCourses }, null, 2),
+    );
+  }
+  res.json(newCourses);
+});
+
+app.post('/login', (req, res, next) => {
+  console.log('wwwwwww', req.body);
+  const { login, token } = req.body;
+  const user = users.find(user => user.login === login);
+  if (user) {
+    // MUTATION!
+    user.token = token;
+    fs.writeFileSync(
+      'src/server/users.json',
+      JSON.stringify({ users }, null, 2),
+    );
+  }
+  console.log('serv', user);
+  res.json(user || {});
 });
 
 /*
 app.get(
   "/req/:data",
-  [
-    sanitizeParam("data")
-      .trim()
-      .escape()
-  ],
-  controllers.retrieveKbspace,
   (req, res, next) => {
     const query = req.params.data;
-    const kbspace = req.data.kbspace.title;
-
-    axios
-      .get(`${process.env.SEARCH_QUERY}?spaceKey=${kbspace}&query=${query}`, {
-        headers: {
-          Authorization: `Basic ${encoded}`,
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        }
-      })
-      .then(response => {
-        res.send(response.data.result);
-      })
-      .catch(error => {
-        next(error);
-      });
   }
 );
-
-router.use((req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    req.session.returnTo = req.path;
-    res.redirect("/login");
-  }
-});
-
-
-
-
-app.post("/admin/save", controllers.bodyError, (req, res, next) => {
-  if (req.body.table === "card") {
-    req.body.card = {
-      id: req.body.id,
-      title: req.body.title,
-      icon: req.body.icon
-    };
-    controllers.updateCard(req, res, next);
-  } else if (req.body.table === "admins") {
-    controllers.updateAdmins(req, res, next);
-  } else if (req.body.table === "links") {
-    controllers.updateLinks(req, res, next);
-  } else {
-    res.end();
-  }
-});
 https://manfredsteyer.github.io/angular-oauth2-oidc/docs/additional-documentation/working-with-httpinterceptors.html
  https://angular.io/guide/service-worker-intro
 */

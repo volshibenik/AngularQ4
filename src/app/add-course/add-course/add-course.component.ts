@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { CoursesService } from 'src/app/courses.service';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
   styleUrls: ['./add-course.component.scss'],
 })
-export class AddCourseComponent {
+export class AddCourseComponent implements OnDestroy {
+  private subs: Subscription;
+
   title = '';
   description = '';
   duration = '';
@@ -18,20 +21,23 @@ export class AddCourseComponent {
   // maybe not use ngModel and just pass values from template?
   constructor(private coursesService: CoursesService, private router: Router) {}
 
+  ngOnDestroy() {
+    this.subs.unsubscribe();
+  }
   clear() {
     this.title = '';
     this.description = '';
     this.duration = '';
-    this.date = '';
   }
 
   add() {
-    this.coursesService.addItem({
-      title: this.title,
-      description: this.description,
-      duration: this.duration,
-      date: this.date,
-    });
+    this.subs = this.coursesService
+      .addItem({
+        title: this.title,
+        description: this.description,
+        duration: this.duration,
+      })
+      .subscribe(data => console.log(data));
     this.clear();
     this.router.navigate(['courses']);
   }
