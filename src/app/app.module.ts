@@ -12,9 +12,10 @@ import { CanActivateGuard } from './guards/can-activate.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditCourseModule } from './edit-course/edit-course.module';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { KkkComponent } from './kkk/kkk.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, KkkComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

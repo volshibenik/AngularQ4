@@ -1,39 +1,15 @@
 <div class="search">
   <mat-form-field class="search-field">
-    <input
-      matInput
-      type="text"
-      placeholder="Search input"
-      [(ngModel)]="value"
-    />
-    <button
-      mat-button
-      *ngIf="value"
-      matSuffix
-      mat-icon-button
-      aria-label="Clear"
-      (click)="value = ''"
-    >
+    <input matInput type="text" placeholder="Search input" [(ngModel)]="value" (input)="kk()" />
+    <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value = ''">
       <mat-icon>close</mat-icon>
     </button>
   </mat-form-field>
 
-  <button
-    class="button button--search"
-    type="button"
-    mat-raised-button
-    color="primary"
-    (click)="search()"
-  >
+  <button class="button button--search" type="button" mat-raised-button color="primary" (click)="search()">
     Search
   </button>
-  <a
-    class="button button--add"
-    type="button"
-    mat-raised-button
-    color="warn"
-    routerLink="./add"
-  >
+  <a class="button button--add" type="button" mat-raised-button color="warn" routerLink="./add">
     Add course
   </a>
 </div>

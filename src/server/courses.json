@@ -17,14 +17,6 @@
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor\n    fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?"
     },
     {
-      "id": 2,
-      "title": "video Course 3",
-      "creationDate": "2019-10-11T09:01:33",
-      "duration": "1030min",
-      "topRated": false,
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi dolor\n    fugit doloremque modi, rerum dolore temporibus quam ducimus dolorem fuga?"
-    },
-    {
       "id": 3,
       "title": "video Course 4",
       "creationDate": "2011-10-11T09:01:33",
