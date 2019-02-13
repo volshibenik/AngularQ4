@@ -37,8 +37,9 @@ export class AddCourseComponent implements OnDestroy {
         description: this.description,
         duration: this.duration,
       })
-      .subscribe(data => console.log(data));
-    this.clear();
-    this.router.navigate(['courses']);
+      .subscribe(() => {
+        this.clear();
+        this.router.navigate(['courses']);
+      });
   }
 }
