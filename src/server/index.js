@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   );
   next();
 });
@@ -45,6 +45,23 @@ app.get('/search', (req, res, next) => {
   } else {
     res.end();
   }
+  res.json(newCourses);
+});
+
+app.post('/login', (req, res, next) => {
+  console.log('wwwwwww', req.body);
+  const { login, token } = req.body;
+  const user = users.find(user => user.login === login);
+  if (user) {
+    // MUTATION!
+    user.token = token;
+    fs.writeFileSync(
+      'src/server/users.json',
+      JSON.stringify({ users }, null, 2),
+    );
+  }
+  console.log('serv', user);
+  res.json(user || {});
 });
 
 app.post('/delete', (req, res, next) => {
@@ -103,6 +120,7 @@ app.post('/login', (req, res, next) => {
   console.log('serv', user);
   res.json(user || {});
 });
+
 
 /*
 app.get(
