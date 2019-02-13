@@ -17,7 +17,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization',
   );
   next();
 });
@@ -103,6 +103,7 @@ app.post('/login', (req, res, next) => {
   console.log('serv', user);
   res.json(user || {});
 });
+
 
 /*
 app.get(
