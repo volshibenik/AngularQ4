@@ -11,12 +11,11 @@ import { Subscription } from 'rxjs';
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
   items: CourseModel[] = [];
-  /*   searchTerm: string;
-   */
-  constructor(private coursesService: CoursesService) { }
   private subsGet: Subscription;
   private subsDelete: Subscription;
   private subsSearch: Subscription;
+
+  constructor(private coursesService: CoursesService) {}
   ngOnInit() {
     this.getCourses();
   }

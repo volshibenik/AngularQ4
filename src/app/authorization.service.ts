@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { UserModel } from './admin/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,15 +11,14 @@ const serverUrl = 'http://localhost:3200/login';
 export class AuthorizationService {
   private token;
   private currentUser;
-  pingHeader;
-  // where do i store user and token, here or at server?
+  userEmitter = new EventEmitter<UserModel>();
 
   constructor(private http: HttpClient) {}
 
   authenticate(user, token) {
     this.currentUser = user;
     this.token = token;
-    this.pingHeader();
+    this.userEmitter.emit(user);
   }
 
   logIn(login, token): Observable<UserModel> {
@@ -30,8 +29,7 @@ export class AuthorizationService {
   logout() {
     this.token = null;
     this.currentUser = null;
-    // temp, while waitin for Observable
-    this.pingHeader();
+    this.userEmitter.emit(null);
   }
 
   isAuthenticated() {
