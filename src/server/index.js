@@ -45,7 +45,6 @@ app.get('/search', (req, res, next) => {
   } else {
     res.end();
   }
-  res.json(newCourses);
 });
 
 app.post('/login', (req, res, next) => {
