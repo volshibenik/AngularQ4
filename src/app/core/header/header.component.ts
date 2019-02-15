@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthorizationService } from 'src/app/authorization.service';
 import { Router } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   authenticated: boolean;
   currentUser;
+  subs: Subscription;
 
   constructor(
     private authService: AuthorizationService,
@@ -18,11 +19,15 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.userEmitter.subscribe(user => {
+    this.subs = this.authService.userEmitter.subscribe(user => {
       console.log('user', user);
       this.currentUser = user;
       this.authenticated = !!user;
     });
+  }
+
+  ngOnDestroy() {
+    this.subs.unsubscribe();
   }
 
   logIn() {

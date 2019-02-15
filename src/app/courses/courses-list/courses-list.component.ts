@@ -3,6 +3,7 @@ import { CourseModel } from 'src/app/core/models/course.model';
 import { CoursesService } from 'src/app/courses.service';
 
 import { Subscription } from 'rxjs';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -15,7 +16,10 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   private subsDelete: Subscription;
   private subsSearch: Subscription;
 
-  constructor(private coursesService: CoursesService) {}
+  constructor(
+    private coursesService: CoursesService,
+    private spinner: SpinnerService,
+  ) {}
   ngOnInit() {
     this.getCourses();
   }
@@ -29,9 +33,11 @@ export class CoursesListComponent implements OnInit, OnDestroy {
 
   getCourses(): void {
     //    this.items = this.coursesService.getList();
-    this.subsGet = this.coursesService
-      .getCourses()
-      .subscribe(d => (this.items = d));
+    this.spinner.maybeActivate(true);
+    this.subsGet = this.coursesService.getCourses().subscribe(d => {
+      this.items = d;
+      this.spinner.maybeActivate(false);
+    });
   }
 
   loadMore(): void {
@@ -39,24 +45,24 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   onSearch(searchTerm: string): void {
-    /*     this.getCourses();
-    console.log('bef', this.items);
-    this.items = new SearchPipe().transform(this.items, searchTerm);
-    console.log('after', this.items);
-    console.log('serv', this.coursesService.getList()); */
-    /*     this.searchTerm = searchTerm; */
+    this.spinner.maybeActivate(true);
     this.subsSearch = this.coursesService
       .searchCourse(searchTerm)
-      .subscribe(d => (this.items = d));
+      .subscribe(d => {
+        this.items = d;
+        this.spinner.maybeActivate(false);
+      });
     // will load all items if true for now
   }
 
   onDelete(id: string): void {
     const confirmDelete = confirm(`r u sure 'bout deletin this?`);
     if (confirmDelete) {
-      this.subsDelete = this.coursesService
-        .deleteCourse(id)
-        .subscribe(d => (this.items = d));
+      this.spinner.maybeActivate(true);
+      this.subsDelete = this.coursesService.deleteCourse(id).subscribe(d => {
+        this.spinner.maybeActivate(false);
+        this.items = d;
+      });
     }
   }
 }

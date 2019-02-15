@@ -10,7 +10,7 @@ import {
 import { Observable, fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, filter } from 'rxjs/operators';
 
-function eventSource(el, event): Observable<Event> {
+/* function eventSource(el, event): Observable<Event> {
   return new Observable(obr => {
     const handler = e => obr.next(e);
     el.addEventListener(event, handler);
@@ -20,7 +20,7 @@ function eventSource(el, event): Observable<Event> {
       },
     };
   });
-}
+} */
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -29,13 +29,13 @@ function eventSource(el, event): Observable<Event> {
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() onSearch = new EventEmitter<string>();
   @ViewChild('inputRef') input: ElementRef;
-  /*   @ViewChild('firstNameInput') nameInputRef: ElementRef; */
   value = 'initial';
   private subs: Subscription;
 
   ngOnInit() {
     console.log('tt', this.input);
-    this.subs = fromEvent(this.input.nativeElement, 'input')
+    const input: HTMLInputElement = this.input.nativeElement;
+    this.subs = fromEvent(input, 'input')
       .pipe(
         debounceTime(250),
         map(e => e.target.value),
