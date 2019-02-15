@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+/* import { Pipe, PipeTransform } from '@angular/core';
 import { CourseModel } from '../core/models/course.model';
 
 @Pipe({
@@ -11,3 +11,4 @@ export class SearchPipe implements PipeTransform {
       : value;
   }
 }
+ */

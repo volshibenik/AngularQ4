@@ -15,9 +15,9 @@ import { CourseModel } from 'src/app/core/models/course.model';
 })
 export class CoursesItemComponent {
   @Input() courseEntity: CourseModel;
-  @Output() onDelete = new EventEmitter<number>();
+  @Output() onDelete = new EventEmitter<string>();
 
   delete(id: number): void {
-    this.onDelete.emit(id);
+    this.onDelete.emit(`${id}`);
   }
 }

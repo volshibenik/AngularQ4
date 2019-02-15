@@ -1,9 +1,15 @@
 <app-search (onSearch)="onSearch($event)"></app-search>
 <div class="courses-list" *ngIf="items.length > 0">
-  <div *ngFor="let item of (items | orderBy | search: searchTerm)">
-    <app-courses-item [courseEntity]="item" (onDelete)="onDelete($event)"></app-courses-item>
+  <div *ngFor="let item of (items | orderBy)">
+    <app-courses-item
+      [courseEntity]="item"
+      (onDelete)="onDelete($event)"
+    ></app-courses-item>
   </div>
-  <button class="btn btn-outline-secondary button--load-more" (click)="loadMore()">
+  <button
+    class="btn btn-outline-secondary button--load-more"
+    (click)="loadMore()"
+  >
     Load more
   </button>
 </div>
