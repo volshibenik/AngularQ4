@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { CoursesItemComponent } from './courses-item.component';
 import { CourseModel } from 'src/app/core/models/course.model';
 import {
@@ -47,9 +47,9 @@ class MatIcon {}
 })
 class TestHostComponent {
   item: CourseModel = expectedCourse;
-  deletedItemId: number;
+  deletedItemId: string;
   onDelete(id: number) {
-    this.deletedItemId = id;
+    this.deletedItemId = `${id}`;
   }
 }
 
@@ -63,7 +63,7 @@ describe('CoursesItem as class', () => {
 
     comp.delete(id);
     expect(comp.onDelete.emit).toHaveBeenCalled();
-    expect(comp.onDelete.emit).toHaveBeenCalledWith(id);
+    expect(comp.onDelete.emit).toHaveBeenCalledWith(`${id}`);
   });
 });
 
@@ -82,6 +82,7 @@ describe('CoursesItem with TestHost', () => {
         CourseRecencyDirective,
         DurationPipe,
       ],
+      imports: [RouterTestingModule],
     });
   });
 
@@ -102,7 +103,7 @@ describe('CoursesItem with TestHost', () => {
     const btn: HTMLElement = root.querySelector('.button--delete');
     btn.click();
 
-    expect(testHostComp.deletedItemId).toEqual(expectedCourse.id);
+    expect(testHostComp.deletedItemId).toEqual(`${expectedCourse.id}`);
   });
 
   it('should check whether @Input accepts & binds correct data', () => {

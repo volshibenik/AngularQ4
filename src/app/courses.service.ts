@@ -49,7 +49,6 @@ export class CoursesService {
   }
 
   addItem(course) {
-    console.log('jjjjjj', course);
     return this.http.post<CourseModel[]>(`${serverUrl}/add`, { course });
   }
 

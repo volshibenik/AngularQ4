@@ -28,18 +28,17 @@ function eventSource(el, event): Observable<Event> {
 })
 export class SearchComponent implements OnInit, OnDestroy {
   @Output() onSearch = new EventEmitter<string>();
-  @ViewChild('inputRef') input: ElementRef;
-  /*   @ViewChild('firstNameInput') nameInputRef: ElementRef; */
+  @ViewChild('inputRef') input: ElementRef<HTMLInputElement>;
   value = 'initial';
   private subs: Subscription;
 
   ngOnInit() {
-    console.log('tt', this.input);
     this.subs = fromEvent(this.input.nativeElement, 'input')
       .pipe(
         debounceTime(250),
-        map(e => e.target.value),
-        filter(val => val.length > 0),
+        map((e: Event) => e.target),
+        map((target: HTMLInputElement) => target.value),
+        filter(val => val.length > 3),
       )
       .subscribe(value => {
         console.log(value);

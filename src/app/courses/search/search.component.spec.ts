@@ -52,13 +52,4 @@ describe('SearchComponent', () => {
 
     expect(component.value).toBe(expectedNew);
   }));
-
-  it('should test click on search button', () => {
-    const searchBtn = fixture.nativeElement.querySelector('.button--search');
-    component.search = jasmine.createSpy('search').and.callThrough();
-
-    searchBtn.click();
-
-    expect(component.search).toHaveBeenCalled();
-  });
 });

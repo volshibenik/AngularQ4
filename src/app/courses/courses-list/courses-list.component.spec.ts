@@ -3,6 +3,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesListComponent } from './courses-list.component';
 import { COURSES } from '../courses.mock';
+import { CourseModel } from 'src/app/core/models/course.model';
+import { of } from 'rxjs';
+import { CoursesService } from 'src/app/courses.service';
 
 @Pipe({ name: 'orderBy' })
 class OrderByPipe implements PipeTransform {
@@ -15,11 +18,25 @@ describe('CoursesListComponent', () => {
   let component: CoursesListComponent;
   let fixture: ComponentFixture<CoursesListComponent>;
   let root: HTMLElement;
+  let courses: CourseModel[];
+  let getCoursesSpy;
 
   beforeEach(() => {
+    courses = COURSES;
+    const coursesService = jasmine.createSpyObj('CoursesService', [
+      'getCourses',
+    ]);
+    getCoursesSpy = coursesService.getCourses.and.returnValue(of(courses));
+
     TestBed.configureTestingModule({
       declarations: [CoursesListComponent, OrderByPipe],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      providers: [
+        {
+          provide: CoursesService,
+          useValue: coursesService,
+        },
+      ],
     });
   });
 
@@ -35,7 +52,7 @@ describe('CoursesListComponent', () => {
   });
 
   it('should create corresponding amount of children via *ngFor', () => {
-    const amount = COURSES.length;
+    const amount = courses.length;
     const items = Array.from(root.querySelectorAll('app-courses-item'));
 
     expect(items.length).toEqual(amount);

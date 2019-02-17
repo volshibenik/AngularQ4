@@ -1,16 +1,20 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { BreadcrumbsComponent } from './breadcrumbs.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('BreadcrumbsComponent', () => {
   let component: BreadcrumbsComponent;
   let fixture: ComponentFixture<BreadcrumbsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [BreadcrumbsComponent],
-    }).compileComponents();
-  }));
+      imports: [RouterTestingModule, HttpClientTestingModule],
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BreadcrumbsComponent);
