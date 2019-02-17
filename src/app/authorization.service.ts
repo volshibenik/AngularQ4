@@ -1,7 +1,9 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { UserModel } from './admin/user.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { SpinnerService } from './spinner.service';
 
 const serverUrl = 'http://localhost:3200/login';
 
@@ -13,17 +15,20 @@ export class AuthorizationService {
   private currentUser;
   userEmitter = new EventEmitter<UserModel>();
 
-  constructor(private http: HttpClient) {}
-
-  authenticate(user, token) {
-    this.currentUser = user;
-    this.token = token;
-    this.userEmitter.emit(user);
-  }
+  constructor(private http: HttpClient, private spinner: SpinnerService) {}
 
   logIn(login, token): Observable<UserModel> {
     this.logout();
-    return this.http.post<UserModel>(serverUrl, { login, token });
+    this.spinner.maybeActivate(true);
+    return this.http.post<UserModel>(serverUrl, { login, token }).pipe(
+      switchMap(user => {
+        this.currentUser = user;
+        this.token = user.token;
+        this.userEmitter.emit(user);
+        this.spinner.maybeActivate(false);
+        return of(user);
+      }),
+    );
   }
 
   logout() {

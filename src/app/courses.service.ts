@@ -3,6 +3,8 @@ import { CourseModel } from './core/models/course.model';
 import { COURSES } from './courses/courses.mock';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { SpinnerService } from './spinner.service';
+import { map } from 'rxjs/operators';
 
 const serverUrl = 'http://localhost:3200';
 @Injectable({
@@ -11,7 +13,7 @@ const serverUrl = 'http://localhost:3200';
 export class CoursesService {
   private courses = COURSES;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private spinner: SpinnerService) {}
 
   /* TODO private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -29,19 +31,41 @@ export class CoursesService {
   } */
 
   getCourses(start = '0', count = '4'): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(`${serverUrl}/courses`, {
-      params: { start, count },
-    });
+    this.spinner.maybeActivate(true);
+    return this.http
+      .get<CourseModel[]>(`${serverUrl}/courses`, {
+        params: { start, count },
+      })
+      .pipe(
+        map(v => {
+          this.spinner.maybeActivate(false);
+          return v;
+        }),
+      );
   }
 
   searchCourse(searchTerm: string): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(`${serverUrl}/search`, {
-      params: { searchTerm },
-    });
+    this.spinner.maybeActivate(true);
+    return this.http
+      .get<CourseModel[]>(`${serverUrl}/search`, {
+        params: { searchTerm },
+      })
+      .pipe(
+        map(v => {
+          this.spinner.maybeActivate(false);
+          return v;
+        }),
+      );
   }
 
   deleteCourse(id: string) {
-    return this.http.post<CourseModel[]>(`${serverUrl}/delete`, { id });
+    this.spinner.maybeActivate(true);
+    return this.http.post<CourseModel[]>(`${serverUrl}/delete`, { id }).pipe(
+      map(v => {
+        this.spinner.maybeActivate(false);
+        return v;
+      }),
+    );
   }
 
   getItem(id: number): CourseModel {
@@ -49,7 +73,13 @@ export class CoursesService {
   }
 
   addItem(course) {
-    return this.http.post<CourseModel[]>(`${serverUrl}/add`, { course });
+    this.spinner.maybeActivate(true);
+    return this.http.post<CourseModel[]>(`${serverUrl}/add`, { course }).pipe(
+      map(v => {
+        this.spinner.maybeActivate(false);
+        return v;
+      }),
+    );
   }
 
   updateItem(course: CourseModel) {
