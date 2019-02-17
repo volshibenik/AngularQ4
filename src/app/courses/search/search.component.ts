@@ -10,7 +10,7 @@ import {
 import { Observable, fromEvent, Subscription } from 'rxjs';
 import { debounceTime, map, filter } from 'rxjs/operators';
 
-function eventSource(el, event): Observable<Event> {
+/* function eventSource(el, event): Observable<Event> {
   return new Observable(obr => {
     const handler = e => obr.next(e);
     el.addEventListener(event, handler);
@@ -20,7 +20,7 @@ function eventSource(el, event): Observable<Event> {
       },
     };
   });
-}
+} */
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',

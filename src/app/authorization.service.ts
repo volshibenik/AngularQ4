@@ -33,7 +33,12 @@ export class AuthorizationService {
   }
 
   isAuthenticated() {
-    return !!(this.token && this.currentUser);
+    return new Observable<boolean>(obr => {
+      obr.next(!!(this.token && this.currentUser));
+      return {
+        unsubscribe() {},
+      };
+    });
   }
 
   getUserInfo() {

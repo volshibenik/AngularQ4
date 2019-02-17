@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoComponent } from './header/logo/logo.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AppRoutingModule } from '../app-routing.module';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -14,8 +15,14 @@ import { AppRoutingModule } from '../app-routing.module';
     FooterComponent,
     LogoComponent,
     NotFoundComponent,
+    SpinnerComponent,
   ],
   imports: [CommonModule, AppRoutingModule],
-  exports: [HeaderComponent, BreadcrumbsComponent, FooterComponent],
+  exports: [
+    HeaderComponent,
+    BreadcrumbsComponent,
+    FooterComponent,
+    SpinnerComponent,
+  ],
 })
 export class CoreModule {}
