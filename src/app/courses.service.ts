@@ -11,8 +11,6 @@ const serverUrl = 'http://localhost:3200';
   providedIn: 'root',
 })
 export class CoursesService {
-  private courses = COURSES;
-
   constructor(private http: HttpClient, private spinner: SpinnerService) {}
 
   /* TODO private handleError(error: HttpErrorResponse) {
@@ -68,8 +66,16 @@ export class CoursesService {
     );
   }
 
-  getItem(id: number): CourseModel {
-    return this.courses.find(e => e.id === id);
+  getItem(id: string) {
+    this.spinner.maybeActivate(true);
+    return this.http
+      .get<CourseModel>(`${serverUrl}/course`, { params: { id } })
+      .pipe(
+        map(v => {
+          this.spinner.maybeActivate(false);
+          return v;
+        }),
+      );
   }
 
   addItem(course) {
@@ -82,11 +88,11 @@ export class CoursesService {
     );
   }
 
-  updateItem(course: CourseModel) {
+  /*   updateItem(course: CourseModel) {
     const { id } = course;
     const index = this.courses.findIndex(e => e.id === id);
     const newCourses = this.courses.slice();
     newCourses[index] = course;
     return (this.courses = newCourses);
-  }
+  }  */
 }
