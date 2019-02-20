@@ -47,6 +47,17 @@ app.get('/search', (req, res, next) => {
   }
 });
 
+app.get('/course', (req, res) => {
+  if (req.query) {
+    const id = +req.query.id;
+    const data = courses.slice();
+    const item = data.find(e => e.id === id);
+    res.json(item);
+  } else {
+    res.end();
+  }
+});
+
 app.post('/login', (req, res, next) => {
   console.log('wwwwwww', req.body);
   const { login, token } = req.body;
@@ -119,7 +130,6 @@ app.post('/login', (req, res, next) => {
   console.log('serv', user);
   res.json(user || {});
 });
-
 
 /*
 app.get(

@@ -1,23 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { SpinnerService } from 'src/app/spinner.service';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-spinner',
-  templateUrl: './spinner.component.html',
+  template: `
+    <div class="spinner" [ngClass]="{ on: state$ | async }">
+      <div class="spinner__logo"></div>
+    </div>
+  `,
   styleUrls: ['./spinner.component.scss'],
 })
-export class SpinnerComponent implements OnInit, OnDestroy {
-  show = false;
-  private subs: Subscription;
+export class SpinnerComponent {
+  state$: Observable<boolean> = this.spinner.state.pipe(startWith(false));
 
   constructor(private spinner: SpinnerService) {}
-
-  ngOnInit() {
-    this.subs = this.spinner.state.subscribe(state => (this.show = state));
-  }
-
-  ngOnDestroy() {
-    this.subs.unsubscribe();
-  }
 }

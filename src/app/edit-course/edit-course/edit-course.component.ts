@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CoursesService } from 'src/app/courses.service';
 import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { CourseModel } from 'src/app/core/models/course.model';
 
 @Component({
   selector: 'app-edit-course',
@@ -10,12 +12,15 @@ import { Subscription } from 'rxjs';
 })
 export class EditCourseComponent implements OnInit, OnDestroy {
   private subs: Subscription;
-  id: number;
-  /*  title = '';
-  description = '';
-  duration = '';
-  date = ''; */
-  course;
+  course: CourseModel = {
+    title: '',
+    id: 9999,
+    description: '',
+    creationDate: '',
+    duration: '',
+    topRated: false,
+  };
+
   constructor(
     private route: ActivatedRoute,
     private coursesService: CoursesService,
@@ -23,11 +28,9 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.subs = this.route.paramMap.subscribe(d => {
-      console.log(/* d.params, */ d.keys, d.get('id')); // why params exists but shows error ?
-      this.id = +d.get('id');
-    });
-    this.course = Object.assign({}, this.coursesService.getItem(this.id));
+    this.subs = this.route.paramMap
+      .pipe(switchMap(d => this.coursesService.getItem(d.get('id'))))
+      .subscribe(d => (this.course = d));
   }
 
   ngOnDestroy() {
@@ -35,9 +38,10 @@ export class EditCourseComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.coursesService.updateItem(this.course);
-    this.cancel();
+    // this.coursesService.updateItem(this.course);
+    // this.cancel();
   }
+
   cancel() {
     this.router.navigate(['courses']);
   }
