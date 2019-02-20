@@ -22,7 +22,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
           .join('');
         if (+lastPiece === +lastPiece) {
           // means it's number -> id
-          this.data = this.coursesService.getItem(+lastPiece).title;
+          //  this.data = this.coursesService.getItem(+lastPiece).title;
         } else {
           this.data = '';
         }

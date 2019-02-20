@@ -1,0 +1,33 @@
+.spinner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: .3;
+  z-index: 1000;
+  background: #ccc;
+  display: none;
+  pointer-events: none;
+
+  &.on {
+   display: block;
+  }
+
+  &__logo {
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 60px);
+    border: 12px solid white;
+    border-top-color: coral;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

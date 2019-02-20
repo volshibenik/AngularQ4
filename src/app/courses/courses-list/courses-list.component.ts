@@ -11,12 +11,11 @@ import { Subscription } from 'rxjs';
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
   items: CourseModel[] = [];
-  /*   searchTerm: string;
-   */
-  constructor(private coursesService: CoursesService) { }
   private subsGet: Subscription;
   private subsDelete: Subscription;
   private subsSearch: Subscription;
+
+  constructor(private coursesService: CoursesService) {}
   ngOnInit() {
     this.getCourses();
   }
@@ -29,7 +28,6 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   getCourses(): void {
-    //    this.items = this.coursesService.getList();
     this.subsGet = this.coursesService
       .getCourses()
       .subscribe(d => (this.items = d));
@@ -40,12 +38,6 @@ export class CoursesListComponent implements OnInit, OnDestroy {
   }
 
   onSearch(searchTerm: string): void {
-    /*     this.getCourses();
-    console.log('bef', this.items);
-    this.items = new SearchPipe().transform(this.items, searchTerm);
-    console.log('after', this.items);
-    console.log('serv', this.coursesService.getList()); */
-    /*     this.searchTerm = searchTerm; */
     this.subsSearch = this.coursesService
       .searchCourse(searchTerm)
       .subscribe(d => (this.items = d));

@@ -19,10 +19,10 @@ export class AddCourseComponent implements OnDestroy {
   // TODO switch to r. forms when have knowledge
 
   // maybe not use ngModel and just pass values from template?
-  constructor(private coursesService: CoursesService, private router: Router) { }
+  constructor(private coursesService: CoursesService, private router: Router) {}
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subs && this.subs.unsubscribe();
   }
   clear() {
     this.title = '';

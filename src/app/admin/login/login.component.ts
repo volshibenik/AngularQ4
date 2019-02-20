@@ -19,7 +19,6 @@ export class LoginComponent implements OnDestroy {
     const token = Date.now();
     this.subs = this.authService.logIn(login, token).subscribe(user => {
       if (user && user.login) {
-        this.authService.authenticate(user, token);
         this.router.navigate(['courses']);
       }
     });
