@@ -2,6 +2,9 @@ import { Component, OnDestroy } from '@angular/core';
 import { AuthorizationService } from 'src/app/authorization.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Login } from 'src/app/store/actions/login';
+import { State } from 'src/app/store/reducers/login';
 
 @Component({
   selector: 'app-login',
@@ -13,6 +16,7 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private authService: AuthorizationService,
     private router: Router,
+    private store: Store<State>,
   ) {}
 
   logIn(login) {
@@ -22,6 +26,10 @@ export class LoginComponent implements OnDestroy {
         this.router.navigate(['courses']);
       }
     });
+  }
+
+  submit(login: string) {
+    this.store.dispatch(new Login({ login }));
   }
 
   ngOnDestroy() {

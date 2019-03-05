@@ -3,3 +3,7 @@ export interface UserModel {
   login: string;
   token?: number;
 }
+
+export interface LoginModel {
+  login: string;
+}
