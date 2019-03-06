@@ -15,6 +15,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { storeLogger } from 'ngrx-store-logger';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/login';
 
 export function logger(reducer) {
   return storeLogger()(reducer);
@@ -34,6 +36,7 @@ export const metaReducers = [logger];
     EditCourseModule,
     AdminModule,
     StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [
     CanActivateGuard,

@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthorizationService } from '../authorization.service';
 import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { State } from '../store/reducers';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CanActivateGuard implements CanActivate {
-  constructor(
-    private authService: AuthorizationService,
-    private router: Router,
-  ) {}
+  constructor(private router: Router, private store: Store<State>) {}
   canActivate(): Observable<boolean> {
-    return this.authService.isAuthenticated().pipe(
+    return this.store.select('auth', 'loggedIn').pipe(
       map(e => {
         if (e) {
           return true;
