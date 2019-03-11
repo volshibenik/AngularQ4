@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { UserModel } from './admin/user.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap, catchError } from 'rxjs/operators';
 import { SpinnerService } from './spinner.service';
 
 const serverUrl = 'http://localhost:3200/login';
@@ -19,16 +19,22 @@ export class AuthorizationService {
 
   logIn(login, token): Observable<UserModel> {
     this.logout();
-    this.spinner.maybeActivate(true);
-    return this.http.post<UserModel>(serverUrl, { login, token }).pipe(
+    /*  this.spinner.maybeActivate(true); */
+    return this.http.post<UserModel>(serverUrl, {
+      login,
+      token,
+    }); /* .pipe(
       switchMap(user => {
-        this.currentUser = user;
-        this.token = user.token;
-        this.userEmitter.emit(user);
-        this.spinner.maybeActivate(false);
+        console.log('service after backend', user);
         return of(user);
       }),
-    );
+      catchError(e => {
+        this.userEmitter.emit(e);
+        this.spinner.maybeActivate(false);
+        console.log('tap');
+        return of(e)
+      }),
+    ); */
   }
 
   logout() {

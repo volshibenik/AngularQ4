@@ -12,7 +12,17 @@ import { CanActivateGuard } from './guards/can-activate.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EditCourseModule } from './edit-course/edit-course.module';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
+import { storeLogger } from 'ngrx-store-logger';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from './store/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AuthEffects } from './store/effects/login';
 
+export function logger(reducer) {
+  return storeLogger()(reducer);
+}
+
+export const metaReducers = [logger];
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -25,6 +35,8 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
     AddCourseModule,
     EditCourseModule,
     AdminModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AuthEffects]),
   ],
   providers: [
     CanActivateGuard,

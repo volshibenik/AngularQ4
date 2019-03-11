@@ -7,8 +7,8 @@ const app = express();
 const server = http.createServer(app);
 
 // const { COURSES } = require('./courses.data');
-const { courses } = require('./courses.json');
 const { users } = require('./users.json');
+const { courses } = require('./courses.json');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -71,7 +71,7 @@ app.post('/login', (req, res, next) => {
     );
   }
   console.log('serv', user);
-  res.json(user || {});
+  user ? res.json(user) : res.error('err444');
 });
 
 app.post('/delete', (req, res, next) => {
