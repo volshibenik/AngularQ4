@@ -11,7 +11,7 @@ const serverUrl = 'http://localhost:3200';
   providedIn: 'root',
 })
 export class CoursesService {
-  constructor(private http: HttpClient, private spinner: SpinnerService) {}
+  constructor(private http: HttpClient, private spinner: SpinnerService) { }
 
   /* TODO private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -88,11 +88,13 @@ export class CoursesService {
     );
   }
 
-  /*   updateItem(course: CourseModel) {
-    const { id } = course;
-    const index = this.courses.findIndex(e => e.id === id);
-    const newCourses = this.courses.slice();
-    newCourses[index] = course;
-    return (this.courses = newCourses);
-  }  */
+  updateItem(course: CourseModel) {
+    console.log(course);
+
+    /*     const { id } = course;
+        const index = this.courses.findIndex(e => e.id === id);
+        const newCourses = this.courses.slice();
+        newCourses[index] = course;
+        return (this.courses = newCourses); */
+  }
 }

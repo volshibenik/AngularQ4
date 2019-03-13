@@ -1,44 +1,29 @@
-<mat-form-field class="full-width">
-  <input
-    matInput
-    placeholder="Title"
-    value="new Video"
-    [(ngModel)]="course.title"
-  />
-</mat-form-field>
+<div *ngIf="errorsJson">{{errorsJson}}</div>
 
-<mat-form-field class="full-width">
-  <textarea
-    matInput
-    placeholder="Description"
-    [(ngModel)]="course.description"
-  ></textarea>
-</mat-form-field>
+<form [formGroup]="course">
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Title" formControlName="title" />
+  </mat-form-field>
 
-<mat-form-field class="full-width">
-  <input matInput placeholder="Date" [(ngModel)]="course.creationDate" />
-</mat-form-field>
+  <mat-form-field class="full-width">
+    <textarea matInput placeholder="Description" formControlName="description"></textarea>
+  </mat-form-field>
 
-<mat-form-field class="full-width">
-  <input matInput placeholder="Duration" [(ngModel)]="course.duration" />
-</mat-form-field>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Date" formControlName="creationDate" />
+  </mat-form-field>
 
-<button
-  class="button--add"
-  type="button"
-  mat-raised-button
-  color="primary"
-  (click)="save()"
->
-  Save
-</button>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Duration" formControlName="duration" />
+  </mat-form-field>
 
-<button
-  class="button--cancel"
-  type="button"
-  mat-raised-button
-  color="primary"
-  (click)="cancel()"
->
-  Cancel
-</button>
+  <button class="button--add" type="button" mat-raised-button color="primary" (click)="submit()">
+    Save
+  </button>
+
+  <button class="button--cancel" type="button" mat-raised-button color="primary" (click)="cancel()">
+    Cancel
+  </button>
+
+
+</form>
