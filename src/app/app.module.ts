@@ -2,6 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+
+import { TableModule } from 'primeng/table';
+
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
@@ -18,9 +24,15 @@ import { reducers } from './store/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/login';
 
+import { NgScrollbarModule } from 'ngx-scrollbar';
+
 export function logger(reducer) {
   return storeLogger()(reducer);
 }
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+};
 
 export const metaReducers = [logger];
 @NgModule({
@@ -35,12 +47,19 @@ export const metaReducers = [logger];
     AddCourseModule,
     EditCourseModule,
     AdminModule,
+    PerfectScrollbarModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AuthEffects]),
+    NgScrollbarModule,
+    TableModule,
   ],
   providers: [
     CanActivateGuard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG,
+    },
   ],
   bootstrap: [AppComponent],
 })

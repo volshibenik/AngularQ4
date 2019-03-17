@@ -11,6 +11,8 @@ import { Subscription } from 'rxjs';
 })
 export class CoursesListComponent implements OnInit, OnDestroy {
   items: CourseModel[] = [];
+  compact = true;
+  shown: 'native' | 'hover' | 'always' = 'native';
   private subsGet: Subscription;
   private subsDelete: Subscription;
   private subsSearch: Subscription;

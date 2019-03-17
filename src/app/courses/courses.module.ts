@@ -15,6 +15,7 @@ import { DurationPipe } from './duration.pipe';
 import { OrderByPipe } from './order-by.pipe';
 // import { SearchPipe } from './search.pipe';
 import { AppRoutingModule } from '../app-routing.module';
+import { NgScrollbarModule } from 'ngx-scrollbar';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AppRoutingModule } from '../app-routing.module';
     MatButtonModule,
     MatInputModule,
     AppRoutingModule,
+    NgScrollbarModule,
   ],
   exports: [CoursesListComponent],
 })
