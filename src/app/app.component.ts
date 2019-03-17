@@ -1,5 +1,4 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 @Component({
   selector: 'app-root',
@@ -7,40 +6,37 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnChanges {
-  lo = [1, 2, 3, 4, 5, 6];
-  config: PerfectScrollbarConfigInterface = {};
+  delete;
 
-  cars: any[];
+  readonly sidebarConfig = {
+    title: 'Add New Widget',
+    close: () => this.close(this),
+    buttons: [
+      {
+        title: 'Save Widget',
+        iconClassName: '',
+        display: () => true,
+        className: 'custom-button blue',
+        click: () => this.onSave(this),
+      },
+      {
+        title: 'Delete Widget',
+        iconClassName: '',
+        display: () => true,
+        className: 'custom-button',
+        click: () => this.delete.emit('this.widget.id'),
+      },
+    ],
+  };
 
-  cols: any[];
-
-  ngOnInit() {
-    this.cars = [
-      { brand: 'VW', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-      { brand: 'Audi', year: 2011, color: 'Black', vin: 'gwregre345' },
-      { brand: 'Renault', year: 2005, color: 'Gray', vin: 'h354htr' },
-      { brand: 'BMW', year: 2003, color: 'Blue', vin: 'j6w54qgh' },
-      { brand: 'Mercedes', year: 1995, color: 'Orange', vin: 'hrtwy34' },
-      { brand: 'Volvo', year: 2005, color: 'Black', vin: 'jejtyj' },
-      { brand: 'Honda', year: 2012, color: 'Yellow', vin: 'g43gr' },
-      { brand: 'Jaguar', year: 2013, color: 'Orange', vin: 'greg34' },
-      { brand: 'Ford', year: 2000, color: 'Black', vin: 'h54hw5' },
-      { brand: 'Fiat', year: 2013, color: 'Red', vin: '245t2s' },
-      { brand: 'VW', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-      { brand: 'VW', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-      { brand: 'VW', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-      { brand: 'VW', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-      { brand: 'VW', year: 2012, color: 'Orange', vin: 'dsad231ff' },
-    ];
-
-    this.cols = [
-      { field: 'vin', header: 'Vin' },
-      { field: 'year', header: 'Year' },
-      { field: 'brand', header: 'Brand' },
-      { field: 'color', header: 'Color' },
-    ];
+  close(a) {
+    console.log('clo', a);
   }
 
+  onSave(a) {
+    console.log('save', a);
+  }
+  ngOnInit() {}
   ngOnChanges() {
     console.log('kk');
   }

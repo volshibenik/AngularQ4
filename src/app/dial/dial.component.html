@@ -1,0 +1,22 @@
+<p-dialog [(visible)]="display">
+  <p-header>
+    Header content here
+  </p-header>
+  Content
+  <p-footer>
+    //buttons
+    <button (click)="config.buttons[0].click(this)">
+      {{ config.buttons[0].title }}
+    </button>
+    <button (click)="config.close()">foot</button>
+  </p-footer>
+</p-dialog>
+<button
+  type="button"
+  (click)="showDialog()"
+  pButton
+  icon="pi pi-info-circle"
+  label="Show"
+>
+  A
+</button>

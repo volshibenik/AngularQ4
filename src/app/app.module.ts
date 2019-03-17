@@ -25,6 +25,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthEffects } from './store/effects/login';
 
 import { NgScrollbarModule } from 'ngx-scrollbar';
+import { DialComponent } from './dial/dial.component';
+
+import { DialogModule } from 'primeng/dialog';
 
 export function logger(reducer) {
   return storeLogger()(reducer);
@@ -36,7 +39,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 export const metaReducers = [logger];
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DialComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -52,6 +55,7 @@ export const metaReducers = [logger];
     EffectsModule.forRoot([AuthEffects]),
     NgScrollbarModule,
     TableModule,
+    DialogModule,
   ],
   providers: [
     CanActivateGuard,

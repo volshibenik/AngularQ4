@@ -9,39 +9,8 @@
   </main> -->
 
   <h3 class="first">Basic</h3>
-  <div class="t-cont">
-    <perfect-scrollbar [config]="config">
-      <p-table [value]="cars">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Vin</th>
-            <th>Year</th>
-            <th>Brand</th>
-            <th>Color</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-car>
-          <tr>
-            <td>{{ car.vin }}</td>
-            <td>{{ car.year }}</td>
-            <td>{{ car.brand }}</td>
-            <td>{{ car.color }}</td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </perfect-scrollbar>
-  </div>
 
-  <!--   <div>
-    <div class="kk">
-      <perfect-scrollbar [config]="config">
-        <p *ngFor="let k of lo">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis,
-          eum?
-        </p>
-      </perfect-scrollbar>
-    </div>
-  </div> -->
-
+  <app-dial [config]="sidebarConfig"></app-dial>
+  asd
   <app-footer></app-footer>
 </div>
