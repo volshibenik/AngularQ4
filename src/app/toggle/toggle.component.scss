@@ -1,0 +1,74 @@
+.ui-inputswitch {
+  position: relative;
+  display: inline-block;
+  width: 3em;
+  height: 1.75em;
+
+  .ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    input {
+      transform: scale(0);
+    }
+  }
+}
+.ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+  background-color: #007ad9;
+}
+
+.ui-inputswitch .ui-inputswitch-slider {
+  -moz-transition: background-color 0.2s;
+  -o-transition: background-color 0.2s;
+  -webkit-transition: background-color 0.2s;
+  transition: background-color 0.2s;
+  border-radius: 30px;
+  background: #cccccc;
+}
+.ui-inputswitch-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+  border-radius: 30px;
+}
+body .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider:before {
+  -webkit-transform: translateX(1.25em);
+  -ms-transform: translateX(1.25em);
+  transform: translateX(1.25em);
+}
+
+body .ui-inputswitch .ui-inputswitch-slider:before {
+  background-color: #ffffff;
+  height: 1.25em;
+  width: 1.25em;
+  left: 0.25em;
+  bottom: 0.25em;
+  border-radius: 50%;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.ui-inputswitch-checked .ui-inputswitch-slider:before {
+  -webkit-transform: translateX(1.25em);
+  transform: translateX(1.25em);
+}
+
+.ui-inputswitch-slider:before {
+  position: absolute;
+  content: '';
+  height: 1.25em;
+  width: 1.25em;
+  left: 0.25em;
+  bottom: 0.25em;
+  border-radius: 50%;
+  transition: 0.3s;
+}

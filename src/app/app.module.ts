@@ -2,11 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import {
+  PerfectScrollbarModule,
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+} from 'ngx-perfect-scrollbar';
 
 import { TableModule } from 'primeng/table';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,6 +31,8 @@ import { NgScrollbarModule } from 'ngx-scrollbar';
 import { DialComponent } from './dial/dial.component';
 
 import { DialogModule } from 'primeng/dialog';
+import { InputSwitchComponent } from './toggle/toggle.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function logger(reducer) {
   return storeLogger()(reducer);
@@ -39,11 +44,13 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
 export const metaReducers = [logger];
 @NgModule({
-  declarations: [AppComponent, DialComponent],
+  declarations: [AppComponent, DialComponent, InputSwitchComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     CoreModule,
     CoursesModule,
@@ -55,6 +62,7 @@ export const metaReducers = [logger];
     EffectsModule.forRoot([AuthEffects]),
     NgScrollbarModule,
     TableModule,
+    InputSwitchModule,
     DialogModule,
   ],
   providers: [

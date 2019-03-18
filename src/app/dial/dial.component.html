@@ -2,13 +2,13 @@
   <p-header>
     Header content here
   </p-header>
-  Content
+  <ac-input-switch [(ngModel)]="ctr"></ac-input-switch>
   <p-footer>
     //buttons
     <button (click)="config.buttons[0].click(this)">
       {{ config.buttons[0].title }}
     </button>
-    <button (click)="config.close()">foot</button>
+    <button (click)="kk()">foot</button>
   </p-footer>
 </p-dialog>
 <button
